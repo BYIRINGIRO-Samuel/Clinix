@@ -11,6 +11,8 @@ public interface DoctorDAO {
     List<User> getPatientsForDoctor(Long doctorId);
     void createMedicalRecord(MedicalRecord record);
     List<MedicalRecord> getPatientHistory(Long patientId);
+    List<MedicalRecord> getAllRecordsForDoctor(Long doctorId);
     void writePrescription(Prescription prescription);
     List<Prescription> getPrescriptionsForPatient(Long patientId);
+    List<Prescription> getAllPrescriptionsForDoctor(Long doctorId);
 }

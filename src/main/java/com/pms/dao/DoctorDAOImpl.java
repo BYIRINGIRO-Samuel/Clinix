@@ -84,4 +84,28 @@ public class DoctorDAOImpl implements DoctorDAO {
             em.close();
         }
     }
+
+    @Override
+    public List<MedicalRecord> getAllRecordsForDoctor(Long doctorId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery("SELECT m FROM MedicalRecord m WHERE m.doctor.id = :did ORDER BY m.recordDate DESC", MedicalRecord.class)
+                    .setParameter("did", doctorId)
+                    .getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public List<Prescription> getAllPrescriptionsForDoctor(Long doctorId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery("SELECT p FROM Prescription p WHERE p.doctor.id = :did ORDER BY p.datePrescribed DESC", Prescription.class)
+                    .setParameter("did", doctorId)
+                    .getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

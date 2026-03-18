@@ -49,9 +49,27 @@ public class DoctorServlet extends HttpServlet {
             case "viewHistory":
                 viewHistory(request, response);
                 break;
+            case "records":
+                listRecords(request, response, doctor);
+                break;
+            case "prescriptions":
+                listPrescriptions(request, response, doctor);
+                break;
             default:
                 response.sendRedirect("doctor-dashboard.jsp");
         }
+    }
+
+    private void listRecords(HttpServletRequest request, HttpServletResponse response, User doctor) throws ServletException, IOException {
+        List<MedicalRecord> records = doctorDAO.getAllRecordsForDoctor(doctor.getId());
+        request.setAttribute("records", records);
+        request.getRequestDispatcher("doctor-medical-records.jsp").forward(request, response);
+    }
+
+    private void listPrescriptions(HttpServletRequest request, HttpServletResponse response, User doctor) throws ServletException, IOException {
+        List<Prescription> prescriptions = doctorDAO.getAllPrescriptionsForDoctor(doctor.getId());
+        request.setAttribute("prescriptions", prescriptions);
+        request.getRequestDispatcher("doctor-prescriptions.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
