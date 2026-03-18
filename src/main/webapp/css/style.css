@@ -61,7 +61,7 @@ body::after {
   display: flex;
   width: 100%;
   max-width: 1050px;
-  min-height: 650px;
+  min-height: 550px;
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -195,7 +195,7 @@ body::after {
 /* Right Panel form area */
 .split-right {
   flex: 1;
-  padding: 3rem 4rem;
+  padding: 2rem 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -227,7 +227,7 @@ body::after {
 
 /* The minimalistic input layout from design */
 .form-group {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   position: relative;
 }
 
