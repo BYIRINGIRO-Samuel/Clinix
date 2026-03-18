@@ -25,37 +25,24 @@
 body {
   background: var(--bg-color);
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Corner decorations removed */
+
+/* Split Container */
+/* Helper for centered auth pages since body is now edge-to-edge */
+.auth-page-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  overflow-x: hidden;
+  min-height: 100vh;
   padding: 2rem;
 }
 
-/* Corner decorations to match the design - dark teal shapes */
-body::before, body::after {
-  content: '';
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  background: var(--teal-dark);
-  z-index: 0;
-}
-
-body::before {
-  top: -200px;
-  left: -200px;
-  transform: rotate(45deg);
-}
-
-body::after {
-  bottom: -250px;
-  right: -150px;
-  border-radius: 50% 0 0 0;
-}
-
-/* Split Container */
 .auth-wrapper {
   background: var(--white);
   border-radius: 20px;
