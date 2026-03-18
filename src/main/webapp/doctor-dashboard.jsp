@@ -1,30 +1,92 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.pms.model.Appointment" %>
 <%@ page import="com.pms.model.User" %>
-<%
-    User user = (User) session.getAttribute("user");
-    if (user == null || !"Doctor".equals(user.getRole())) {
-        response.sendRedirect("login.jsp");
-        return;
-    }
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Dashboard</title>
+    <title>Doctor Dashboard | PMS Health</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        .dashboard-container { text-align: center; padding: 4rem; background: var(--white); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 1;}
-        h1 { color: var(--teal-primary); margin-bottom: 1rem; }
-    </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <h1>Welcome to Doctor dashboard</h1>
-        <p>Hello, <%= user.getFullName() %>!</p>
-        <br>
-        <a href="LogoutServlet" class="btn-primary" style="text-decoration: none; display: inline-block;">Logout</a>
+    <%
+        User currentUser = (User) session.getAttribute("user");
+        if (currentUser == null || !"Doctor".equals(currentUser.getRole())) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        List<Appointment> appointments = (List<Appointment>) request.getAttribute("appointments");
+        if (appointments == null) {
+            response.sendRedirect("DoctorServlet?action=dashboard");
+            return;
+        }
+    %>
+
+    <div class="dashboard-layout">
+        <jsp:include page="components/sidebar.jsp" />
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1>Clinic Overview</h1>
+                    <p class="text-muted">Welcome back, Dr. <%= currentUser.getFullName() %></p>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar">D</div>
+                    <div class="user-info">
+                        <p style="font-weight: 600;"><%= currentUser.getFullName() %></p>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">Physician</p>
+                    </div>
+                </div>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
+                    <div class="stat-info"><h3>Appointments</h3><p><%= appointments.size() %></p></div>
+                </div>
+                <!-- More stats can be added here -->
+            </div>
+
+            <div class="data-card">
+                <div class="data-header">
+                    <h2 style="font-weight: 700;">Upcoming Appointments</h2>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Patient Name</th>
+                                <th>Reason</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (appointments.isEmpty()) { %>
+                                <tr><td colspan="5" style="text-align: center; padding: 3rem;">No appointments scheduled today.</td></tr>
+                            <% } else { %>
+                                <% for (Appointment a : appointments) { %>
+                                    <tr>
+                                        <td><%= a.getDateTime().toLocalTime() %></td>
+                                        <td style="font-weight: 600;"><%= a.getPatient().getFullName() %></td>
+                                        <td><%= a.getReason() %></td>
+                                        <td><span class="role-badge badge-Patient"><%= a.getStatus() %></span></td>
+                                        <td>
+                                            <a href="DoctorServlet?action=viewHistory&patientId=<%= a.getPatient().getId() %>" class="btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.8rem; text-decoration: none;">View Profile</a>
+                                        </td>
+                                    </tr>
+                                <% } %>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
     </div>
 </body>
 </html>
