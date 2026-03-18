@@ -43,7 +43,6 @@
         <div class="split-right">
             <div class="form-header">
                 <h2>Welcome Back</h2>
-                <p>New here? <a href="signup.jsp">Sign Up</a></p>
             </div>
 
             <form action="LoginServlet" method="POST">
@@ -62,6 +61,10 @@
 
                 <button type="submit" class="btn-primary">Sign In</button>
             </form>
+
+            <div class="auth-footer">
+                <p>New here? <a href="signup.jsp">Sign Up</a></p>
+            </div>
 
 
         </div>

@@ -52,7 +52,6 @@
         <div class="split-right">
             <div class="form-header" style="margin-bottom: 1.5rem;">
                 <h2>Get Started</h2>
-                <p>Already have account? <a href="login.jsp">Sign In</a></p>
             </div>
 
             <form action="SignupServlet" method="POST">
@@ -87,6 +86,10 @@
 
                 <button type="submit" class="btn-primary">Sign Up</button>
             </form>
+
+            <div class="auth-footer" style="margin-top: 1.5rem; text-align: center;">
+                <p>Already have account? <a href="login.jsp">Sign In</a></p>
+            </div>
 
 
         </div>

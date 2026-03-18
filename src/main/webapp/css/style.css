@@ -61,7 +61,7 @@ body::after {
   display: flex;
   width: 100%;
   max-width: 1050px;
-  min-height: 550px;
+  height: 570px; /* Using height instead of min-height to strictly prevent scrolling */
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -365,6 +365,28 @@ select.form-control {
 .google svg { color: #EA4335; width: 20px; }
 .twitter svg { color: #1DA1F2; width: 20px; }
 .facebook svg { color: #1877F2; width: 20px; }
+
+/* New auth-footer styling for the bottom links */
+.auth-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.auth-footer p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.auth-footer a {
+  color: var(--teal-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  color: var(--teal-dark);
+  text-decoration: underline;
+}
 
 /* Responsive */
 @media (max-width: 968px) {
