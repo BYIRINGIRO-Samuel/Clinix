@@ -4,15 +4,14 @@ import com.pms.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import com.pms.util.HibernateUtil;
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
-    private EntityManagerFactory emf;
+    private EntityManagerFactory emf = HibernateUtil.getEntityManagerFactory();
 
     public UserDAOImpl() {
-        // "pmsPU" should match the persistence-unit name in META-INF/persistence.xml
-        emf = Persistence.createEntityManagerFactory("pmsPU");
     }
 
     @Override
