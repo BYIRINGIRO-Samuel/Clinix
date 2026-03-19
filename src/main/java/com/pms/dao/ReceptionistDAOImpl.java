@@ -106,4 +106,31 @@ public class ReceptionistDAOImpl implements ReceptionistDAO {
             em.close();
         }
     }
+
+    @Override
+    public Billing getBillingById(Long billingId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.find(Billing.class, billingId);
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public void recordPayment(Long billingId, String method, String status) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Billing b = em.find(Billing.class, billingId);
+            if (b != null) {
+                b.setPaymentMethod(method);
+                b.setStatus(status);
+                em.merge(b);
+            }
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
 }
