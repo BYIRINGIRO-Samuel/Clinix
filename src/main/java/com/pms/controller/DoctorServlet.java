@@ -58,9 +58,13 @@ public class DoctorServlet extends HttpServlet {
                 break;
             case "notifications":
                 java.util.List<NotificationItem> notifs = new java.util.ArrayList<>();
+                java.util.Date lastCheck = doctor.getLastNotifCheck();
+                if (lastCheck == null) lastCheck = new java.util.Date(0);
+
                 for(Appointment a : doctorDAO.getAppointmentsForDoctor(doctor.getId())) {
                     if ("Scheduled".equals(a.getStatus())) {
-                        notifs.add(new NotificationItem("appointment", "Upcoming Appointment", "You have an appointment with " + a.getPatient().getFullName(), a.getAppointmentDate(), true, "Appointment", "#dbeafe", "#1e40af"));
+                        boolean unread = a.getCreatedAt() != null && a.getCreatedAt().after(lastCheck);
+                        notifs.add(new NotificationItem("appointment", "Upcoming Appointment", "You have an appointment with " + a.getPatient().getFullName(), a.getAppointmentDate(), unread, "Appointment", "#dbeafe", "#1e40af"));
                     }
                 }
                 request.setAttribute("notificationsList", notifs);
