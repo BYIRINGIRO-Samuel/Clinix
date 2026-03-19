@@ -8,6 +8,7 @@ import com.pms.model.Appointment;
 import com.pms.model.MedicalRecord;
 import com.pms.model.Prescription;
 import com.pms.model.User;
+import com.pms.model.NotificationItem;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -55,6 +56,16 @@ public class DoctorServlet extends HttpServlet {
             case "prescriptions":
                 listPrescriptions(request, response, doctor);
                 break;
+            case "notifications":
+                java.util.List<NotificationItem> notifs = new java.util.ArrayList<>();
+                for(Appointment a : doctorDAO.getAppointmentsForDoctor(doctor.getId())) {
+                    if ("Scheduled".equals(a.getStatus())) {
+                        notifs.add(new NotificationItem("appointment", "Upcoming Appointment", "You have an appointment with " + a.getPatient().getFullName(), a.getAppointmentDate(), true, "Appointment", "#dbeafe", "#1e40af"));
+                    }
+                }
+                request.setAttribute("notificationsList", notifs);
+                request.getRequestDispatcher("notifications.jsp").forward(request, response);
+                break;
             default:
                 response.sendRedirect("doctor-dashboard.jsp");
         }
@@ -86,6 +97,16 @@ public class DoctorServlet extends HttpServlet {
             addMedicalRecord(request, response, doctor);
         } else if ("addPrescription".equals(action)) {
             addPrescription(request, response, doctor);
+        } else if ("updateProfile".equals(action)) {
+            String fullName = request.getParameter("fullName");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            if (fullName != null) doctor.setFullName(fullName);
+            if (email != null) doctor.setEmail(email);
+            if (phone != null) doctor.setPhone(phone);
+            userDAO.updateUser(doctor);
+            session.setAttribute("user", doctor);
+            response.sendRedirect("profile.jsp?status=success");
         }
     }
 
