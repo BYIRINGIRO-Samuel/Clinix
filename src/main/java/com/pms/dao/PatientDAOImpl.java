@@ -111,4 +111,24 @@ public class PatientDAOImpl implements PatientDAO {
             em.close();
         }
     }
+
+    @Override
+    public void payBilling(Long billingId, String paymentMethod) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Billing billing = em.find(Billing.class, billingId);
+            if (billing != null) {
+                billing.setStatus("Paid");
+                billing.setPaymentMethod(paymentMethod);
+                em.merge(billing);
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
+    }
 }
