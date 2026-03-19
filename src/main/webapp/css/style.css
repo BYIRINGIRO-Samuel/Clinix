@@ -181,6 +181,119 @@ body {
   border-radius: 4px;
 }
 
+/* Form Controls & Selects */
+.form-select, .form-control {
+  width: 100%;
+  padding: 0.75rem 0;
+  border: none;
+  border-bottom: 2px solid var(--border-color);
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  background: transparent;
+  outline: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  appearance: none;
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a0aec0'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  padding-right: 1.5rem;
+}
+
+.form-control:focus, .form-select:focus {
+  border-bottom-color: var(--teal-primary);
+}
+
+/* Button Variants */
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-outline-success {
+  background: white;
+  border: 1px solid var(--teal-primary);
+  color: var(--teal-primary);
+}
+
+.btn-outline-success:hover {
+  background: var(--teal-primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(26, 191, 154, 0.2);
+}
+
+.btn-outline-primary {
+  background: white;
+  border: 1px solid #3b82f6;
+  color: #3b82f6;
+}
+
+.btn-outline-primary:hover {
+  background: #3b82f6;
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+.btn-link {
+  color: var(--teal-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.btn-link:hover {
+  color: var(--teal-dark);
+  transform: translateY(-1px);
+}
+
+.btn-solid-teal {
+  background: var(--teal-primary);
+  color: white;
+  border: none;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-solid-teal:hover {
+  background: var(--teal-dark);
+  box-shadow: 0 4px 12px rgba(26, 191, 154, 0.3);
+}
+
+.btn-solid-blue {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-solid-blue:hover {
+  background: #2563eb;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.text-success { color: #10b981; }
+.small { font-size: 0.875rem; }
+
 /* Right Panel form area */
 .split-right {
   flex: 1;
@@ -225,28 +338,6 @@ body {
   font-size: 0.8rem;
   color: var(--text-muted);
   margin-bottom: 0.5rem;
-}
-
-.form-control {
-  width: 100%;
-  padding: 0.5rem 0;
-  border: none;
-  border-bottom: 2px solid var(--border-color);
-  font-size: 1.05rem;
-  color: var(--text-dark);
-  background: transparent;
-  outline: none;
-  transition: border-color 0.3s ease;
-  font-weight: 500;
-}
-
-.form-control::placeholder {
-  color: rgba(160, 174, 192, 0.5);
-  font-weight: 400;
-}
-
-.form-control:focus {
-  border-bottom-color: var(--teal-primary);
 }
 
 .password-toggle {
@@ -483,6 +574,37 @@ select.form-control {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2.5rem;
+}
+
+.stats-scroll-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 1.5rem;
+  padding: 1rem 0.5rem 2rem 0.5rem;
+  margin-bottom: 2rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--teal-primary) transparent;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.stats-scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.stats-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.stats-scroll-container::-webkit-scrollbar-thumb {
+  background: var(--teal-primary);
+  border-radius: 10px;
+}
+
+.stats-scroll-container .stat-card {
+  min-width: 280px;
+  flex: 0 0 auto;
 }
 
 .stat-card {
