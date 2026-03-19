@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Make Payment | PMS</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/topbar.css">
 </head>
 <body class="dashboard-body">
     <div class="dashboard-layout">
@@ -35,12 +36,13 @@
         </aside>
         
         <main class="main-content">
-            <header class="top-bar">
-                <div class="page-title">
-                    <h1>Complete Payment</h1>
-                    <p class="text-muted">Securely pay your outstanding medical bills.</p>
-                </div>
-            </header>
+            <jsp:include page="components/topbar.jsp" />
+
+            <div class="main-inner-content">
+            <div class="page-title" style="margin-bottom:2rem;">
+                <h1>Complete Payment</h1>
+                <p class="text-muted">Securely pay your outstanding medical bills.</p>
+            </div>
 
             <div class="data-card" style="max-width: 600px; margin: 2rem auto; padding: 3rem;">
                 <div class="data-header" style="border: none; padding: 0 0 2rem 0; text-align: center;">
@@ -85,6 +87,7 @@
                     </div>
                 </form>
             </div>
+            </div><!-- /.main-inner-content -->
         </main>
     </div>
 </body>
