@@ -16,19 +16,19 @@
     </div>
     <nav class="sidebar-menu">
         <% if ("Admin".equals(role)) { %>
-            <a href="admin-dashboard.jsp" class="menu-item <%= uri.endsWith("admin-dashboard.jsp") ? "active" : "" %>">
+            <a href="AdminServlet?action=dashboard" class="menu-item <%= uri.contains("admin-dashboard") ? "active" : "" %>">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                 <span>Dashboard</span>
             </a>
-            <a href="manage-users.jsp" class="menu-item <%= uri.contains("manage-users") ? "active" : "" %>">
+            <a href="AdminServlet?action=manageUsers" class="menu-item <%= uri.contains("manage-users") ? "active" : "" %>">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                 <span>Manage Users</span>
             </a>
-            <a href="manage-doctors.jsp" class="menu-item <%= uri.contains("manage-doctors") ? "active" : "" %>">
+            <a href="AdminServlet?action=manageDoctors" class="menu-item <%= uri.contains("manage-doctors") ? "active" : "" %>">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
                 <span>Manage Doctors</span>
             </a>
-            <a href="manage-patients.jsp" class="menu-item <%= uri.contains("manage-patients") ? "active" : "" %>">
+            <a href="AdminServlet?action=managePatients" class="menu-item <%= uri.contains("manage-patients") ? "active" : "" %>">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                 <span>Manage Patients</span>
             </a>
@@ -36,24 +36,24 @@
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                 <span>Departments</span>
             </a>
-            <a href="reports.jsp" class="menu-item <%= uri.contains("reports") ? "active" : "" %>">
+            <a href="AdminServlet?action=reports" class="menu-item <%= uri.contains("reports") ? "active" : "" %>">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 002 2h2zM13 19v-4a2 2 0 00-2-2H11a2 2 0 002 2h2zM17 19v-8a2 2 0 00-2-2H15a2 2 0 002 2h2z"/></svg>
                 <span>Reports & Analytics</span>
             </a>
-            <a href="payments.jsp" class="menu-item <%= uri.contains("payments") ? "active" : "" %>">
+            <a href="AdminServlet?action=payments" class="menu-item <%= uri.contains("payments") ? "active" : "" %>">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zM17 16v2a2 2 0 01-2 2H9a2 2 0 01-2-2v-2m3-3h.01M17 16h.01M14 11h.01M10 11h.01M12 11h.01"/></svg>
                 <span>Payments</span>
             </a>
-            <a href="system-logs.jsp" class="menu-item <%= uri.contains("system-logs") ? "active" : "" %>">
+            <a href="AdminServlet?action=logs" class="menu-item <%= uri.contains("system-logs") ? "active" : "" %>">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 <span>System Logs</span>
             </a>
         <% } else if ("Doctor".equals(role)) { %>
-            <a href="doctor-dashboard.jsp" class="menu-item <%= uri.endsWith("doctor-dashboard.jsp") ? "active" : "" %>">
+            <a href="DoctorServlet?action=dashboard" class="menu-item <%= uri.contains("dashboard") ? "active" : "" %>">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                 <span>Dashboard</span>
             </a>
-            <a href="doctor-appointments.jsp" class="menu-item <%= uri.contains("appointments") ? "active" : "" %>">
+            <a href="DoctorServlet?action=appointments" class="menu-item <%= uri.contains("appointments") ? "active" : "" %>">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                 <span>My Appointments</span>
             </a>
