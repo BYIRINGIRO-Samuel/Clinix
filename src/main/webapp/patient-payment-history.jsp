@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment History | PMS</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/topbar.css">
 </head>
 <body>
     <div class="dashboard-layout">
@@ -63,12 +64,13 @@
         </aside>
 
         <main class="main-content">
-            <header class="top-bar">
-                <div class="page-title">
-                    <h1>Payment History</h1>
-                    <p style="color: var(--text-muted);">Track your billing and payments</p>
-                </div>
-            </header>
+            <jsp:include page="components/topbar.jsp" />
+
+            <div class="main-inner-content">
+            <div class="page-title" style="margin-bottom:2rem;">
+                <h1>Payment History</h1>
+                <p style="color: var(--text-muted);">Track your billing and payments</p>
+            </div>
 
             <div class="data-card">
                 <div class="table-responsive">
@@ -118,6 +120,7 @@
                     </table>
                 </div>
             </div>
+            </div><!-- /.main-inner-content -->
         </main>
     </div>
 </body>
