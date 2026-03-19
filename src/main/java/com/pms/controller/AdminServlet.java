@@ -53,8 +53,18 @@ public class AdminServlet extends HttpServlet {
             case "logs":
                 showLogs(request, response);
                 break;
+            case "listDepartments":
+                showDepartments(request, response);
+                break;
+            case "deleteDept":
+                adminDAO.deleteDepartment(Long.parseLong(request.getParameter("id")));
+                response.sendRedirect("AdminServlet?action=listDepartments");
+                break;
             case "notifications":
                 List<NotificationItem> notifs = new java.util.ArrayList<>();
+                java.util.Date lastCheck = user.getLastNotifCheck();
+                if (lastCheck == null) lastCheck = new java.util.Date(0);
+
                 for(Object[] log : adminDAO.getRecentActivity()) {
                     String logMessage = log[1] + " " + log[0];
                     java.util.Date d = null;
@@ -65,7 +75,8 @@ public class AdminServlet extends HttpServlet {
                     } else if (log[2] instanceof java.time.LocalDateTime) {
                         d = java.util.Date.from(((java.time.LocalDateTime) log[2]).atZone(java.time.ZoneId.systemDefault()).toInstant());
                     }
-                    notifs.add(new NotificationItem("system", "System Activity", logMessage, d, true, "System", "#f3e8ff", "#7e22ce"));
+                    boolean unread = d != null && d.after(lastCheck);
+                    notifs.add(new NotificationItem("system", "System Activity", logMessage, d, unread, "System", "#f3e8ff", "#7e22ce"));
                 }
                 request.setAttribute("notificationsList", notifs);
                 request.getRequestDispatcher("notifications.jsp").forward(request, response);
@@ -73,6 +84,11 @@ public class AdminServlet extends HttpServlet {
             default:
                 showDashboard(request, response);
         }
+    }
+
+    private void showDepartments(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("depts", adminDAO.getAllDepartments());
+        request.getRequestDispatcher("manage-departments.jsp").forward(request, response);
     }
 
     private void showDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -107,7 +123,10 @@ public class AdminServlet extends HttpServlet {
     }
 
     private void showReports(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Here we could add stats for charts
+        request.setAttribute("totalPatients", adminDAO.getTotalPatients());
+        request.setAttribute("totalRevenue", adminDAO.getTotalRevenue());
+        request.setAttribute("growthData", adminDAO.getMonthlyPatientGrowth());
+        request.setAttribute("revenueByDept", adminDAO.getRevenueByDepartment());
         request.getRequestDispatcher("reports.jsp").forward(request, response);
     }
 
@@ -127,7 +146,14 @@ public class AdminServlet extends HttpServlet {
         }
 
         String action = request.getParameter("action");
-        if ("updateProfile".equals(action)) {
+        if ("addDept".equals(action)) {
+            String name = request.getParameter("name");
+            String desc = request.getParameter("description");
+            String head = request.getParameter("headOfDept");
+            com.pms.model.Department dept = new com.pms.model.Department(name, desc, head);
+            adminDAO.addDepartment(dept);
+            response.sendRedirect("AdminServlet?action=listDepartments");
+        } else if ("updateProfile".equals(action)) {
             String fullName = request.getParameter("fullName");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
