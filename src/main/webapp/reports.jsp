@@ -27,6 +27,21 @@
                 </div>
             </header>
 
+            <div class="stats-scroll-container" style="display: flex; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; min-width: 0;">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Total Patients</h3>
+                        <p><%= request.getAttribute("totalPatients") != null ? request.getAttribute("totalPatients") : "Loading..." %></p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Total Revenue</h3>
+                        <p>$<%= request.getAttribute("totalRevenue") != null ? request.getAttribute("totalRevenue") : "0.00" %></p>
+                    </div>
+                </div>
+            </div>
+
             <div class="stats-grid">
                 <div class="data-card" style="padding: 1.5rem;">
                     <h3 style="margin-bottom: 1.5rem;">Patient Growth</h3>
