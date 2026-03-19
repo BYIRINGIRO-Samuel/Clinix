@@ -11,28 +11,52 @@
     // Compute unread count based on actual DB pending items
     int unreadCount = 0;
     if (topbarUser != null) {
+        java.util.Date lastCheck = topbarUser.getLastNotifCheck();
+        if (lastCheck == null) {
+            // If never checked, use a very old date
+            lastCheck = new java.util.Date(0); 
+        }
+
         if ("Patient".equals(tbRole)) {
             PatientDAO pDao = new PatientDAOImpl();
             for(Appointment a : pDao.getAppointmentsByPatientId(topbarUser.getId())) {
-                if ("Scheduled".equals(a.getStatus())) unreadCount++;
+                if ("Scheduled".equals(a.getStatus())) {
+                    java.util.Date created = a.getCreatedAt();
+                    if (created != null && created.after(lastCheck)) unreadCount++;
+                }
             }
             for(Billing b : pDao.getBillingsByPatientId(topbarUser.getId())) {
-                if ("Pending".equals(b.getStatus())) unreadCount++;
+                if ("Pending".equals(b.getStatus())) {
+                    java.util.Date bDate = b.getBillingDate();
+                    if (bDate != null && bDate.after(lastCheck)) unreadCount++;
+                }
             }
         } else if ("Doctor".equals(tbRole)) {
             DoctorDAO dDao = new DoctorDAOImpl();
             for(Appointment a : dDao.getAppointmentsForDoctor(topbarUser.getId())) {
-                if ("Scheduled".equals(a.getStatus())) unreadCount++;
+                if ("Scheduled".equals(a.getStatus())) {
+                    java.util.Date created = a.getCreatedAt();
+                    if (created != null && created.after(lastCheck)) unreadCount++;
+                }
             }
         } else if ("Receptionist".equals(tbRole)) {
             ReceptionistDAO rDao = new ReceptionistDAOImpl();
             for(Billing b : rDao.getAllBillings()) {
-                if ("Pending".equals(b.getStatus())) unreadCount++;
+                if ("Pending".equals(b.getStatus())) {
+                    java.util.Date bDate = b.getBillingDate();
+                    if (bDate != null && bDate.after(lastCheck)) unreadCount++;
+                }
             }
         } else if ("Admin".equals(tbRole)) {
             AdminDAO aDao = new AdminDAOImpl();
             List<Object[]> acts = aDao.getRecentActivity();
-            if(acts != null) unreadCount = acts.size();
+            if(acts != null) {
+                for(Object[] log : acts) {
+                    java.util.Date logDate = null;
+                    if (log[2] instanceof java.util.Date) logDate = (java.util.Date) log[2];
+                    if (logDate != null && logDate.after(lastCheck)) unreadCount++;
+                }
+            }
         }
     }
 
