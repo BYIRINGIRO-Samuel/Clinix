@@ -65,6 +65,11 @@ public class PatientServlet extends HttpServlet {
             case "myAppointments":
                 listAppointments(request, response, patient.getId());
                 break;
+            case "payForm":
+                Long bidParam = Long.parseLong(request.getParameter("billingId"));
+                request.setAttribute("billing", patientDAO.getBillingsByPatientId(patient.getId()).stream().filter(b -> b.getId().equals(bidParam)).findFirst().orElse(null));
+                request.getRequestDispatcher("patient-pay-invoice.jsp").forward(request, response);
+                break;
             case "medicalHistory":
                 listMedicalHistory(request, response, patient.getId());
                 break;
@@ -93,6 +98,8 @@ public class PatientServlet extends HttpServlet {
             updateProfile(request, response, patient);
         } else if ("bookAppointment".equals(action)) {
             bookAppointment(request, response, patient);
+        } else if ("pay".equals(action)) {
+            processPayment(request, response);
         }
     }
 
@@ -170,5 +177,12 @@ public class PatientServlet extends HttpServlet {
             e.printStackTrace();
             response.sendRedirect("PatientServlet?action=bookAppointment&status=error");
         }
+    }
+
+    private void processPayment(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Long billingId = Long.parseLong(request.getParameter("billingId"));
+        String method = request.getParameter("paymentMethod");
+        patientDAO.payBilling(billingId, method);
+        response.sendRedirect("PatientServlet?action=paymentHistory&status=paid");
     }
 }
