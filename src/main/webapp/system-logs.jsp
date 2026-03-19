@@ -40,25 +40,26 @@
                                 <th>IP Address</th>
                             </tr>
                         </thead>
-                        <tbody style="font-family: monospace; font-size: 0.85rem;">
+                        <tbody>
+                            <%
+                                List<Object[]> logs = (List<Object[]>) request.getAttribute("logs");
+                                if (logs != null && !logs.isEmpty()) {
+                                    for (Object[] log : logs) {
+                            %>
                             <tr>
-                                <td>2024-03-21 14:22:45</td>
-                                <td>admin@pms.com</td>
-                                <td>Logged in from Chrome/Win10</td>
-                                <td>192.168.1.45</td>
+                                <td><%= log[2] %></td>
+                                <td><%= log[1] %></td>
+                                <td><%= log[0] %></td>
+                                <td><span class="role-badge badge-Patient"><%= log[3] %></span></td>
                             </tr>
+                            <%
+                                    }
+                                } else {
+                            %>
                             <tr>
-                                <td>2024-03-21 13:10:12</td>
-                                <td>system</td>
-                                <td>Automated backup completed</td>
-                                <td>127.0.0.1</td>
+                                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;">No recent system logs found.</td>
                             </tr>
-                            <tr>
-                                <td>2024-03-21 12:05:01</td>
-                                <td>dr.house@pms.com</td>
-                                <td>Updated patient medical record</td>
-                                <td>192.168.1.102</td>
-                            </tr>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>
