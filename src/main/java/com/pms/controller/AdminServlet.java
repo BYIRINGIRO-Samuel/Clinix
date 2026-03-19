@@ -53,6 +53,23 @@ public class AdminServlet extends HttpServlet {
             case "logs":
                 showLogs(request, response);
                 break;
+            case "notifications":
+                List<NotificationItem> notifs = new java.util.ArrayList<>();
+                for(Object[] log : adminDAO.getRecentActivity()) {
+                    String logMessage = log[1] + " " + log[0];
+                    java.util.Date d = null;
+                    if (log[2] instanceof java.util.Date) {
+                        d = (java.util.Date) log[2];
+                    } else if (log[2] instanceof java.time.OffsetDateTime) {
+                        d = java.util.Date.from(((java.time.OffsetDateTime) log[2]).toInstant());
+                    } else if (log[2] instanceof java.time.LocalDateTime) {
+                        d = java.util.Date.from(((java.time.LocalDateTime) log[2]).atZone(java.time.ZoneId.systemDefault()).toInstant());
+                    }
+                    notifs.add(new NotificationItem("system", "System Activity", logMessage, d, true, "System", "#f3e8ff", "#7e22ce"));
+                }
+                request.setAttribute("notificationsList", notifs);
+                request.getRequestDispatcher("notifications.jsp").forward(request, response);
+                break;
             default:
                 showDashboard(request, response);
         }
@@ -97,5 +114,31 @@ public class AdminServlet extends HttpServlet {
     private void showLogs(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("logs", adminDAO.getRecentActivity());
         request.getRequestDispatcher("system-logs.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("user");
+        
+        if (currentUser == null || !"Admin".equals(currentUser.getRole())) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        String action = request.getParameter("action");
+        if ("updateProfile".equals(action)) {
+            String fullName = request.getParameter("fullName");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+
+            if (fullName != null) currentUser.setFullName(fullName);
+            if (email != null) currentUser.setEmail(email);
+            if (phone != null) currentUser.setPhone(phone);
+            
+            new com.pms.dao.UserDAOImpl().updateUser(currentUser);
+            session.setAttribute("user", currentUser);
+            response.sendRedirect("profile.jsp?status=success");
+        }
     }
 }
