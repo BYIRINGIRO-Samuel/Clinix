@@ -21,6 +21,10 @@ public class Appointment {
     private java.util.Date appointmentDate;
     private String status; // Pending, Confirmed, Completed, Cancelled
     private String reason;
+    private java.util.Date createdAt = new java.util.Date();
+
+    public java.util.Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(java.util.Date createdAt) { this.createdAt = createdAt; }
 
     public Appointment() {}
 
