@@ -5,6 +5,7 @@ import com.pms.model.Appointment;
 import com.pms.model.Billing;
 import java.util.List;
 import java.util.Map;
+import com.pms.model.Department;
 
 public interface AdminDAO {
     // Counters
@@ -22,4 +23,11 @@ public interface AdminDAO {
     
     // Recent activity
     List<Object[]> getRecentActivity(); // [Activity String, User Name, Timestamp, Status Badge]
+
+    // Department management
+    List<com.pms.model.Department> getAllDepartments();
+    void addDepartment(com.pms.model.Department dept);
+    void deleteDepartment(Long id);
+    java.util.Map<String, Long> getMonthlyPatientGrowth();
+    java.util.Map<String, Double> getRevenueByDepartment();
 }
