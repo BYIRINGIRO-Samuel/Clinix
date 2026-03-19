@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Appointments | PMS</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/topbar.css">
 </head>
 <body>
     <div class="dashboard-layout">
@@ -63,13 +64,16 @@
         </aside>
 
         <main class="main-content">
-            <header class="top-bar">
+            <jsp:include page="components/topbar.jsp" />
+
+            <div class="main-inner-content">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;">
                 <div class="page-title">
                     <h1>My Appointments</h1>
                     <p style="color: var(--text-muted);">View and manage your scheduled visits</p>
                 </div>
                 <a href="PatientServlet?action=bookAppointment" class="btn-primary" style="padding: 0.75rem 1.5rem; text-decoration: none; width: auto; margin-top: 0;">New Appointment</a>
-            </header>
+            </div>
 
             <% if ("booked".equals(request.getParameter("status"))) { %>
                 <div style="background: var(--teal-soft); color: var(--teal-primary); padding: 1rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid var(--teal-primary);">
@@ -114,6 +118,7 @@
                     </table>
                 </div>
             </div>
+            </div><!-- /.main-inner-content -->
         </main>
     </div>
 </body>
