@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient History | Doctor Portal</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/topbar.css">
 </head>
 <body>
     <%
@@ -33,12 +34,13 @@
         <jsp:include page="components/sidebar.jsp" />
 
         <main class="main-content">
-            <header class="top-bar">
-                <div class="page-title">
-                    <h1>Patient: <%= patient.getFullName() %></h1>
-                    <p class="text-muted">Medical History & Records</p>
-                </div>
-            </header>
+            <jsp:include page="components/topbar.jsp" />
+
+            <div class="main-inner-content">
+            <div class="page-title" style="margin-bottom:2rem;">
+                <h1>Patient: <%= patient.getFullName() %></h1>
+                <p class="text-muted">Medical History & Records</p>
+            </div>
 
             <div class="stats-grid">
                 <div class="data-card" style="padding: 1.5rem;">
@@ -109,6 +111,7 @@
                     </table>
                 </div>
             </div>
+            </div><!-- /.main-inner-content -->
         </main>
     </div>
 </body>
