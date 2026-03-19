@@ -56,6 +56,16 @@ public class ReceptionistServlet extends HttpServlet {
                 request.setAttribute("billing", receptionistDAO.getBillingById(bidParam));
                 request.getRequestDispatcher("receptionist-payment.jsp").forward(request, response);
                 break;
+            case "notifications":
+                java.util.List<NotificationItem> notifs = new java.util.ArrayList<>();
+                for(Billing b : receptionistDAO.getAllBillings()) {
+                    if ("Pending".equals(b.getStatus())) {
+                        notifs.add(new NotificationItem("payment", "Pending Payment", "Billing of $" + b.getAmount() + " for " + b.getPatient().getFullName() + " is pending.", b.getBillingDate(), true, "Payment", "#dcfce7", "#15803d"));
+                    }
+                }
+                request.setAttribute("notificationsList", notifs);
+                request.getRequestDispatcher("notifications.jsp").forward(request, response);
+                break;
             default:
                 response.sendRedirect("receptionist-dashboard.jsp");
         }
@@ -81,6 +91,16 @@ public class ReceptionistServlet extends HttpServlet {
             addBilling(request, response);
         } else if ("updateBillingStatus".equals(action)) {
             updateBillingStatus(request, response);
+        } else if ("updateProfile".equals(action)) {
+            String fullName = request.getParameter("fullName");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            if (fullName != null) receptionist.setFullName(fullName);
+            if (email != null) receptionist.setEmail(email);
+            if (phone != null) receptionist.setPhone(phone);
+            userDAO.updateUser(receptionist);
+            session.setAttribute("user", receptionist);
+            response.sendRedirect("profile.jsp?status=success");
         }
     }
 
