@@ -7,18 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Registration & Management | PMS</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/topbar.css">
 </head>
 <body class="dashboard-body">
     <div class="dashboard-layout">
         <jsp:include page="components/sidebar.jsp" />
         
         <main class="main-content">
-            <header class="top-bar">
-                <div class="page-title">
-                    <h1>Patients</h1>
-                    <p class="text-muted">Register new patients or manage existing ones.</p>
-                </div>
-            </header>
+            <jsp:include page="components/topbar.jsp" />
+
+            <div class="main-inner-content">
+            <div class="page-title" style="margin-bottom:2rem;">
+                <h1>Patients</h1>
+                <p class="text-muted">Register new patients or manage existing ones.</p>
+            </div>
 
         <div class="patients-section">
             <!-- Registration Card -->
@@ -85,6 +87,7 @@
                 </div>
             </div>
         </div>
+            </div><!-- /.main-inner-content -->
         </main>
     </div>
 </body>
