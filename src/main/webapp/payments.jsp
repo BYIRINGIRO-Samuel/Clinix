@@ -8,6 +8,7 @@
     <title>Payments Overview | Admin Portal</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/folder-cards.css">
+    <link rel="stylesheet" href="css/topbar.css">
 </head>
 <body>
     <%
@@ -25,12 +26,13 @@
     <div class="dashboard-layout">
         <jsp:include page="components/sidebar.jsp" />
         <main class="main-content">
-            <header class="top-bar">
-                <div class="page-title">
-                    <h1>Payments & Revenue</h1>
-                    <p class="text-muted">Monitor financial transactions</p>
-                </div>
-            </header>
+            <jsp:include page="components/topbar.jsp" />
+
+            <div class="main-inner-content">
+            <div class="page-title" style="margin-bottom:2rem;">
+                <h1>Payments & Revenue</h1>
+                <p class="text-muted">Monitor financial transactions</p>
+            </div>
 
             <div class="stats-scroll-container" style="display: flex; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; min-width: 0;">
                 <div class="stat-card">
@@ -90,6 +92,7 @@
                     </table>
                 </div>
             </div>
+            </div><!-- /.main-inner-content -->
         </main>
     </div>
 </body>
