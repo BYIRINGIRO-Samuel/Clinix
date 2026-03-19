@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient List | Doctor Portal</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/topbar.css">
 </head>
 <body>
     <%
@@ -28,12 +29,13 @@
         <jsp:include page="components/sidebar.jsp" />
 
         <main class="main-content">
-            <header class="top-bar">
-                <div class="page-title">
-                    <h1>Your Patients</h1>
-                    <p class="text-muted">Registered patients under your care</p>
-                </div>
-            </header>
+            <jsp:include page="components/topbar.jsp" />
+
+            <div class="main-inner-content">
+            <div class="page-title" style="margin-bottom:2rem;">
+                <h1>Your Patients</h1>
+                <p class="text-muted">Registered patients under your care</p>
+            </div>
 
             <div class="data-card">
                 <div class="data-header">
@@ -65,6 +67,7 @@
                     </table>
                 </div>
             </div>
+            </div><!-- /.main-inner-content -->
         </main>
     </div>
 </body>
