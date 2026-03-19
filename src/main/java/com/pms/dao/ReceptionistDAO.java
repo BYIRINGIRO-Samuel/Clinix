@@ -14,4 +14,6 @@ public interface ReceptionistDAO {
     void createBilling(Billing billing);
     List<Billing> getAllBillings();
     void updateBillingStatus(Long billingId, String status);
+    Billing getBillingById(Long billingId);
+    void recordPayment(Long billingId, String method, String status);
 }
