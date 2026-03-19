@@ -15,6 +15,7 @@
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/folder-cards.css">
+    <link rel="stylesheet" href="css/topbar.css">
     <style>
         .dashboard-container { text-align: center; padding: 4rem; background: var(--white); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 1;}
         h1 { color: var(--teal-primary); margin-bottom: 1rem; }
@@ -26,21 +27,13 @@
         <jsp:include page="components/sidebar.jsp" />
 
         <main class="main-content">
-            <header class="top-bar">
-                <div class="page-title">
-                    <h1>Dashboard Overview</h1>
-                    <p class="text-muted">Welcome back, <%= user.getFullName() %></p>
-                </div>
-                <div class="user-profile">
-                    <div class="avatar">
-                        <%= user.getFullName().substring(0, 1).toUpperCase() %>
-                    </div>
-                    <div class="user-info">
-                        <p style="font-weight: 700; margin: 0;"><%= user.getFullName() %></p>
-                        <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0;">System Administrator</p>
-                    </div>
-                </div>
-            </header>
+            <jsp:include page="components/topbar.jsp" />
+
+            <div class="main-inner-content">
+            <div class="page-title" style="margin-bottom:2rem;">
+                <h1>Dashboard Overview</h1>
+                <p class="text-muted">Welcome back, <%= user.getFullName() %></p>
+            </div>
 
             <%-- Stats Grid (Now Scrollable) --%>
             <div class="stats-scroll-container" style="display: flex; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; min-width: 0;">
@@ -112,6 +105,7 @@
                     </table>
                 </div>
             </div>
+            </div><!-- /.main-inner-content -->
         </main>
     </div>
 </body>
