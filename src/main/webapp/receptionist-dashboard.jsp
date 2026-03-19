@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reception Dashboard | PMS</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/folder-cards.css">
 </head>
 <body class="dashboard-body">
     <jsp:include page="components/sidebar.jsp" />
