@@ -1,0 +1,174 @@
+package com.pms.controller;
+
+import com.pms.dao.PatientDAO;
+import com.pms.dao.PatientDAOImpl;
+import com.pms.dao.UserDAO;
+import com.pms.dao.UserDAOImpl;
+import com.pms.model.Appointment;
+import com.pms.model.Billing;
+import com.pms.model.MedicalRecord;
+import com.pms.model.Prescription;
+import com.pms.model.User;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+@WebServlet("/PatientServlet")
+public class PatientServlet extends HttpServlet {
+    private PatientDAO patientDAO;
+    private UserDAO userDAO;
+
+    @Override
+    public void init() throws ServletException {
+        System.out.println("Initializing PatientServlet...");
+        try {
+            patientDAO = new PatientDAOImpl();
+            userDAO = new UserDAOImpl();
+            System.out.println("PatientServlet initialized successfully.");
+        } catch (Exception e) {
+            System.err.println("Failed to initialize PatientServlet: " + e.getMessage());
+            e.printStackTrace();
+            throw new ServletException(e);
+        }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null) action = "dashboard";
+
+        HttpSession session = request.getSession();
+        User patient = (User) session.getAttribute("user");
+
+        if (patient == null || !"Patient".equals(patient.getRole())) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        switch (action) {
+            case "dashboard":
+                showDashboard(request, response, patient.getId());
+                break;
+            case "profile":
+                showProfile(request, response, patient.getId());
+                break;
+            case "bookAppointment":
+                showBookingForm(request, response);
+                break;
+            case "myAppointments":
+                listAppointments(request, response, patient.getId());
+                break;
+            case "medicalHistory":
+                listMedicalHistory(request, response, patient.getId());
+                break;
+            case "prescriptions":
+                listPrescriptions(request, response, patient.getId());
+                break;
+            case "paymentHistory":
+                listPaymentHistory(request, response, patient.getId());
+                break;
+            default:
+                response.sendRedirect("PatientServlet?action=dashboard");
+        }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        HttpSession session = request.getSession();
+        User patient = (User) session.getAttribute("user");
+
+        if (patient == null || !"Patient".equals(patient.getRole())) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        if ("updateProfile".equals(action)) {
+            updateProfile(request, response, patient);
+        } else if ("bookAppointment".equals(action)) {
+            bookAppointment(request, response, patient);
+        }
+    }
+
+    private void showDashboard(HttpServletRequest request, HttpServletResponse response, Long patientId) throws ServletException, IOException {
+        List<Appointment> appointments = patientDAO.getAppointmentsByPatientId(patientId);
+        List<Prescription> prescriptions = patientDAO.getPrescriptionsByPatientId(patientId);
+        List<Billing> billings = patientDAO.getBillingsByPatientId(patientId);
+
+        request.setAttribute("appointments", appointments);
+        request.setAttribute("prescriptions", prescriptions);
+        request.setAttribute("billings", billings);
+        request.getRequestDispatcher("patient-dashboard.jsp").forward(request, response);
+    }
+
+    private void showProfile(HttpServletRequest request, HttpServletResponse response, Long patientId) throws ServletException, IOException {
+        User user = patientDAO.getPatientById(patientId);
+        request.setAttribute("patient", user);
+        request.getRequestDispatcher("patient-profile.jsp").forward(request, response);
+    }
+
+    private void showBookingForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<User> doctors = patientDAO.getAllDoctors();
+        request.setAttribute("doctors", doctors);
+        request.getRequestDispatcher("patient-book-appointment.jsp").forward(request, response);
+    }
+
+    private void listAppointments(HttpServletRequest request, HttpServletResponse response, Long patientId) throws ServletException, IOException {
+        List<Appointment> appointments = patientDAO.getAppointmentsByPatientId(patientId);
+        request.setAttribute("appointments", appointments);
+        request.getRequestDispatcher("patient-appointments.jsp").forward(request, response);
+    }
+
+    private void listMedicalHistory(HttpServletRequest request, HttpServletResponse response, Long patientId) throws ServletException, IOException {
+        List<MedicalRecord> records = patientDAO.getMedicalRecordsByPatientId(patientId);
+        request.setAttribute("records", records);
+        request.getRequestDispatcher("patient-medical-history.jsp").forward(request, response);
+    }
+
+    private void listPrescriptions(HttpServletRequest request, HttpServletResponse response, Long patientId) throws ServletException, IOException {
+        List<Prescription> prescriptions = patientDAO.getPrescriptionsByPatientId(patientId);
+        request.setAttribute("prescriptions", prescriptions);
+        request.getRequestDispatcher("patient-prescriptions.jsp").forward(request, response);
+    }
+
+    private void listPaymentHistory(HttpServletRequest request, HttpServletResponse response, Long patientId) throws ServletException, IOException {
+        List<Billing> billings = patientDAO.getBillingsByPatientId(patientId);
+        request.setAttribute("billings", billings);
+        request.getRequestDispatcher("patient-payment-history.jsp").forward(request, response);
+    }
+
+    private void updateProfile(HttpServletRequest request, HttpServletResponse response, User currentPatient) throws IOException {
+        currentPatient.setFullName(request.getParameter("fullName"));
+        currentPatient.setEmail(request.getParameter("email"));
+        currentPatient.setPhone(request.getParameter("phone"));
+        patientDAO.updateProfile(currentPatient);
+        response.sendRedirect("PatientServlet?action=profile&status=success");
+    }
+
+    private void bookAppointment(HttpServletRequest request, HttpServletResponse response, User patient) throws IOException {
+        Long doctorId = Long.parseLong(request.getParameter("doctorId"));
+        String dateStr = request.getParameter("appointmentDate");
+        String reason = request.getParameter("reason");
+
+        try {
+            Date appointmentDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(dateStr);
+            Appointment appointment = new Appointment();
+            appointment.setPatient(patient);
+            appointment.setDoctor(userDAO.getUserById(doctorId));
+            appointment.setAppointmentDate(appointmentDate);
+            appointment.setReason(reason);
+            appointment.setStatus("Pending");
+            patientDAO.bookAppointment(appointment);
+            response.sendRedirect("PatientServlet?action=myAppointments&status=booked");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("PatientServlet?action=bookAppointment&status=error");
+        }
+    }
+}
