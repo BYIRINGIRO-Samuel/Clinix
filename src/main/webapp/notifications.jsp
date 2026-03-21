@@ -20,7 +20,7 @@
         .notif-page-wrapper { max-width: 760px; margin: 0 auto; }
         .notif-filter-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
         .notif-filter-tab {
-            padding: 0.45rem 1.1rem; border-radius: 20px; border: none;
+            padding: 0.45rem 1.1rem; border-radius: 4px; border: none;
             font-size: 0.82rem; font-weight: 600; cursor: pointer;
             background: var(--white); color: var(--text-muted);
             border: 1.5px solid var(--border-color); transition: all 0.2s;
@@ -55,7 +55,7 @@
         .notif-body p  { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
         .notif-meta { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem; }
         .notif-time { font-size: 0.75rem; color: var(--text-muted); }
-        .notif-tag  { font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.6rem; border-radius: 20px; }
+        .notif-tag  { font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.6rem; border-radius: 4px; }
         .notif-unread-dot {
             position: absolute; top: 1rem; right: 1rem;
             width: 8px; height: 8px; border-radius: 50%; background: var(--teal-primary);
