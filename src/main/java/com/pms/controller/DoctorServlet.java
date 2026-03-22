@@ -110,7 +110,7 @@ public class DoctorServlet extends HttpServlet {
             if (phone != null) doctor.setPhone(phone);
             userDAO.updateUser(doctor);
             session.setAttribute("user", doctor);
-            response.sendRedirect("settings.jsp?status=success");
+            response.sendRedirect("settings.jsp?status=success&message=Profile+updated+successfully");
         } else if ("changePassword".equals(action)) {
             String currentPassword = request.getParameter("currentPassword");
             String newPassword = request.getParameter("newPassword");
@@ -129,7 +129,7 @@ public class DoctorServlet extends HttpServlet {
             doctor.setPassword(newPassword);
             userDAO.updateUser(doctor);
             session.setAttribute("user", doctor);
-            response.sendRedirect("settings.jsp?status=success");
+            response.sendRedirect("settings.jsp?status=success&message=Password+changed+successfully");
         }
     }
 
@@ -174,7 +174,7 @@ public class DoctorServlet extends HttpServlet {
         record.setRecordDate(new Date());
 
         doctorDAO.createMedicalRecord(record);
-        response.sendRedirect("DoctorServlet?action=viewHistory&patientId=" + pid);
+        response.sendRedirect("DoctorServlet?action=viewHistory&patientId=" + pid + "&status=success&message=Medical+record+added+successfully");
     }
 
     private void addPrescription(HttpServletRequest request, HttpServletResponse response, User doctor) throws IOException {
@@ -187,6 +187,6 @@ public class DoctorServlet extends HttpServlet {
         prescription.setDatePrescribed(new Date());
 
         doctorDAO.writePrescription(prescription);
-        response.sendRedirect("DoctorServlet?action=viewHistory&patientId=" + pid);
+        response.sendRedirect("DoctorServlet?action=viewHistory&patientId=" + pid + "&status=success&message=Prescription+added+successfully");
     }
 }
