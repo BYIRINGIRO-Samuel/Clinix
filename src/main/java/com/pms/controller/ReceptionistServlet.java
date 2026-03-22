@@ -162,7 +162,7 @@ public class ReceptionistServlet extends HttpServlet {
         patient.setPassword("Patient123!"); // Default password
         patient.setRole("Patient");
         receptionistDAO.registerPatient(patient);
-        response.sendRedirect("ReceptionistServlet?action=patients");
+        response.sendRedirect("ReceptionistServlet?action=patients&status=success&message=Patient+registered+successfully");
     }
 
     private void bookAppointment(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -184,13 +184,13 @@ public class ReceptionistServlet extends HttpServlet {
         
         appointment.setStatus("Scheduled");
         receptionistDAO.bookAppointment(appointment);
-        response.sendRedirect("ReceptionistServlet?action=appointments");
+        response.sendRedirect("ReceptionistServlet?action=appointments&status=success&message=Appointment+booked+successfully");
     }
 
     private void checkinPatient(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Long aid = Long.parseLong(request.getParameter("appointmentId"));
         receptionistDAO.updateAppointmentStatus(aid, "Checked-in");
-        response.sendRedirect("ReceptionistServlet?action=appointments");
+        response.sendRedirect("ReceptionistServlet?action=appointments&status=success&message=Patient+checked-in+successfully");
     }
 
     private void addBilling(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -207,7 +207,7 @@ public class ReceptionistServlet extends HttpServlet {
         billing.setBillingDate(new Date());
         
         receptionistDAO.createBilling(billing);
-        response.sendRedirect("ReceptionistServlet?action=billings");
+        response.sendRedirect("ReceptionistServlet?action=billings&status=success&message=Billing+created+successfully");
     }
 
     private void updateBillingStatus(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -217,6 +217,6 @@ public class ReceptionistServlet extends HttpServlet {
         if (method == null) method = "N/A";
         
         receptionistDAO.recordPayment(bid, method, status);
-        response.sendRedirect("ReceptionistServlet?action=billings&status=updated");
+        response.sendRedirect("ReceptionistServlet?action=billings&status=success&message=Payment+recorded+successfully");
     }
 }
