@@ -2,6 +2,8 @@
 <%@ page import="com.pms.model.User, com.pms.model.Appointment, com.pms.model.Billing, java.util.List" %>
 <%@ page import="com.pms.dao.PatientDAO, com.pms.dao.PatientDAOImpl, com.pms.dao.DoctorDAO, com.pms.dao.DoctorDAOImpl" %>
 <%@ page import="com.pms.dao.ReceptionistDAO, com.pms.dao.ReceptionistDAOImpl, com.pms.dao.AdminDAO, com.pms.dao.AdminDAOImpl" %>
+<link rel="stylesheet" href="css/toast.css">
+
 <%
     User topbarUser = (User) session.getAttribute("user");
     String tbName = (topbarUser != null) ? topbarUser.getFullName() : "Guest";
@@ -160,6 +162,7 @@
     </div>
 </header>
 
+<script src="js/toast.js"></script>
 <script>
 (function() {
     // Profile dropdown toggle
