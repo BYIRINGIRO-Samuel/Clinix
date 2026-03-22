@@ -58,7 +58,7 @@ public class AdminServlet extends HttpServlet {
                 break;
             case "deleteDept":
                 adminDAO.deleteDepartment(Long.parseLong(request.getParameter("id")));
-                response.sendRedirect("AdminServlet?action=listDepartments");
+                response.sendRedirect("AdminServlet?action=listDepartments&status=success&message=Department+deleted+successfully");
                 break;
             case "notifications":
                 List<NotificationItem> notifs = new java.util.ArrayList<>();
@@ -152,7 +152,7 @@ public class AdminServlet extends HttpServlet {
             String head = request.getParameter("headOfDept");
             com.pms.model.Department dept = new com.pms.model.Department(name, desc, head);
             adminDAO.addDepartment(dept);
-            response.sendRedirect("AdminServlet?action=listDepartments");
+            response.sendRedirect("AdminServlet?action=listDepartments&status=success&message=Department+added+successfully");
         } else if ("updateProfile".equals(action)) {
             String fullName = request.getParameter("fullName");
             String email = request.getParameter("email");
@@ -164,7 +164,7 @@ public class AdminServlet extends HttpServlet {
             
             new com.pms.dao.UserDAOImpl().updateUser(currentUser);
             session.setAttribute("user", currentUser);
-            response.sendRedirect("settings.jsp?status=success");
+            response.sendRedirect("settings.jsp?status=success&message=Profile+updated+successfully");
         } else if ("changePassword".equals(action)) {
             String currentPassword = request.getParameter("currentPassword");
             String newPassword = request.getParameter("newPassword");
@@ -183,7 +183,7 @@ public class AdminServlet extends HttpServlet {
             currentUser.setPassword(newPassword);
             new com.pms.dao.UserDAOImpl().updateUser(currentUser);
             session.setAttribute("user", currentUser);
-            response.sendRedirect("settings.jsp?status=success");
+            response.sendRedirect("settings.jsp?status=success&message=Password+changed+successfully");
         }
     }
 }
