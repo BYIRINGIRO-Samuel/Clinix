@@ -187,7 +187,7 @@ public class PatientServlet extends HttpServlet {
         // In a real application, you would hash the new password before setting it.
         patient.setPassword(newPassword);
         userDAO.updateUser(patient); // Assuming userDAO has an updateUser method that handles password updates
-        response.sendRedirect("settings.jsp?status=passwordUpdated");
+        response.sendRedirect("settings.jsp?status=success&message=Password+updated+successfully");
     }
 
     private void updateProfile(HttpServletRequest request, HttpServletResponse response, User currentPatient) throws IOException {
@@ -195,7 +195,7 @@ public class PatientServlet extends HttpServlet {
         currentPatient.setEmail(request.getParameter("email"));
         currentPatient.setPhone(request.getParameter("phone"));
         patientDAO.updateProfile(currentPatient);
-        response.sendRedirect("settings.jsp?status=profileUpdated");
+        response.sendRedirect("settings.jsp?status=success&message=Profile+updated+successfully");
     }
 
     private void bookAppointment(HttpServletRequest request, HttpServletResponse response, User patient) throws IOException {
@@ -213,7 +213,7 @@ public class PatientServlet extends HttpServlet {
             appointment.setReason(reason);
             appointment.setStatus("Pending");
             patientDAO.bookAppointment(appointment);
-            response.sendRedirect("PatientServlet?action=myAppointments&status=booked");
+            response.sendRedirect("PatientServlet?action=myAppointments&status=success&message=Appointment+booked+successfully");
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect("PatientServlet?action=bookAppointment&status=error");
@@ -224,6 +224,6 @@ public class PatientServlet extends HttpServlet {
         Long billingId = Long.parseLong(request.getParameter("billingId"));
         String method = request.getParameter("paymentMethod");
         patientDAO.payBilling(billingId, method);
-        response.sendRedirect("PatientServlet?action=paymentHistory&status=paid");
+        response.sendRedirect("PatientServlet?action=paymentHistory&status=success&message=Payment+processed+successfully");
     }
 }
