@@ -58,7 +58,7 @@ public class AdminDAOImpl implements AdminDAO {
     public List<User> getAllUsers() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT u FROM User u", User.class).getResultList();
+            return em.createQuery("SELECT u FROM User u ORDER BY u.createdAt DESC", User.class).getResultList();
         } finally {
             em.close();
         }
@@ -68,7 +68,7 @@ public class AdminDAOImpl implements AdminDAO {
     public List<User> getAllPatients() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT u FROM User u WHERE u.role = 'Patient'", User.class).getResultList();
+            return em.createQuery("SELECT u FROM User u WHERE u.role = 'Patient' ORDER BY u.createdAt DESC", User.class).getResultList();
         } finally {
             em.close();
         }
@@ -78,7 +78,7 @@ public class AdminDAOImpl implements AdminDAO {
     public List<User> getAllDoctors() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT u FROM User u WHERE u.role = 'Doctor'", User.class).getResultList();
+            return em.createQuery("SELECT u FROM User u WHERE u.role = 'Doctor' ORDER BY u.createdAt DESC", User.class).getResultList();
         } finally {
             em.close();
         }
@@ -111,7 +111,7 @@ public class AdminDAOImpl implements AdminDAO {
             return em.createNativeQuery("SELECT 'New Appointment' as activity, p.fullName as userName, a.appointmentDate as timestamp, a.status as status " +
                                        "FROM appointments a JOIN users p ON a.patient_id = p.id " +
                                        "UNION ALL " +
-                                       "SELECT 'New Signup' as activity, fullName as userName, CURRENT_TIMESTAMP as timestamp, role as status FROM users " +
+                                       "SELECT 'New Signup' as activity, fullName as userName, createdAt as timestamp, role as status FROM users " +
                                        "ORDER BY timestamp DESC")
                      .setMaxResults(10)
                      .getResultList();
@@ -124,7 +124,7 @@ public class AdminDAOImpl implements AdminDAO {
     public List<com.pms.model.Department> getAllDepartments() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT d FROM Department d", com.pms.model.Department.class).getResultList();
+            return em.createQuery("SELECT d FROM Department d ORDER BY d.id DESC", com.pms.model.Department.class).getResultList();
         } finally {
             em.close();
         }
