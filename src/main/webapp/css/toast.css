@@ -18,22 +18,20 @@
     pointer-events: auto;
     min-width: 320px;
     max-width: 420px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 16px;
+    background: var(--white);
+    border-radius: 4px; /* Reduced from 16px to match buttons and cards */
     padding: 16px 20px;
     box-shadow: 
-        0 4px 6px -1px rgba(0, 0, 0, 0.1), 
-        0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+        0 10px 25px -5px rgba(0, 0, 0, 0.1), 
+        0 8px 10px -6px rgba(0, 0, 0, 0.1),
+        0 0 0 1px var(--border-color);
     display: flex;
     align-items: flex-start;
     gap: 14px;
     transform: translateX(120%);
     transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     opacity: 0;
-    border-left: 5px solid transparent;
+    border-left: 4px solid transparent;
 }
 
 .toast.show {
@@ -46,36 +44,36 @@
     opacity: 0;
 }
 
-/* Success Toast */
+/* Success Toast - Using system Teal */
 .toast-success {
-    border-left-color: #10b981; /* Emerald-500 */
+    border-left-color: var(--teal-primary);
 }
 .toast-success .toast-icon {
-    background: #ecfdf5;
-    color: #10b981;
+    background: var(--teal-soft);
+    color: var(--teal-primary);
 }
 
-/* Error Toast */
+/* Error Toast - Using system Red variant */
 .toast-error {
-    border-left-color: #ef4444; /* Red-500 */
+    border-left-color: #ef4444;
 }
 .toast-error .toast-icon {
     background: #fef2f2;
     color: #ef4444;
 }
 
-/* Info Toast */
+/* Info Toast - Using Blue */
 .toast-info {
-    border-left-color: #3b82f6; /* Blue-500 */
+    border-left-color: #3b82f6;
 }
 .toast-info .toast-icon {
     background: #eff6ff;
     color: #3b82f6;
 }
 
-/* Warning Toast */
+/* Warning Toast - Using Amber */
 .toast-warning {
-    border-left-color: #f59e0b; /* Amber-500 */
+    border-left-color: #f59e0b;
 }
 .toast-warning .toast-icon {
     background: #fffbeb;
@@ -85,7 +83,7 @@
 .toast-icon {
     width: 36px;
     height: 36px;
-    border-radius: 10px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,45 +102,50 @@
 .toast-title {
     font-weight: 700;
     font-size: 15px;
-    color: #1f2937;
+    color: var(--text-dark);
     margin-bottom: 2px;
 }
 
 .toast-message {
     font-size: 14px;
-    color: #4b5563;
+    color: var(--text-muted);
     line-height: 1.4;
 }
 
 .toast-close {
     background: transparent;
     border: none;
-    color: #9ca3af;
+    color: var(--text-muted);
     cursor: pointer;
     padding: 4px;
     margin-top: -4px;
     margin-right: -8px;
     transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .toast-close:hover {
-    color: #4b5563;
+    color: var(--text-dark);
+    background: rgba(0,0,0,0.05);
+    border-radius: 4px;
 }
 
-/* Dark mode adjustments (if application has it) */
+.toast-close svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Dark mode adjustments */
 @media (prefers-color-scheme: dark) {
-    /* 
-       Just in case there's a dark mode, we adjust glass background.
-       If your app already has a specific .dark-mode class, 
-       we can use that instead.
-    */
     .toast {
-        background: rgba(31, 41, 55, 0.85);
+        background: #1f2937;
         box-shadow: 
             0 10px 15px -3px rgba(0, 0, 0, 0.3),
             0 0 0 1px rgba(255, 255, 255, 0.05) inset;
     }
     .toast-title { color: #f9fafb; }
     .toast-message { color: #d1d5db; }
-    .toast-icon { filter: brightness(1.2); }
 }
+
