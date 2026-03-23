@@ -27,7 +27,7 @@ public class ReceptionistDAOImpl implements ReceptionistDAO {
     public List<User> getAllPatients() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT u FROM User u WHERE u.role = 'Patient'", User.class).getResultList();
+            return em.createQuery("SELECT u FROM User u WHERE u.role = 'Patient' ORDER BY u.createdAt DESC", User.class).getResultList();
         } finally {
             em.close();
         }
