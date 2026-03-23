@@ -28,7 +28,7 @@ body {
   margin: 0;
   padding: 0;
   position: relative;
-  overflow-x: hidden;
+  /* Removed overflow-x: hidden to allow horizontal scroll when needed */
 }
 
 /* Corner decorations removed */
@@ -473,6 +473,7 @@ select.form-control {
   display: flex;
   min-height: 100vh;
   width: 100%;
+  min-width: 0; /* Prevent overflow of flex children */
 }
 
 .sidebar {
@@ -528,6 +529,7 @@ select.form-control {
 /* Main Content Area */
 .main-content {
   flex: 1;
+  min-width: 0; /* Crucial for preventing flex children from exceeding parent width */
   margin-left: var(--sidebar-width);
   background: var(--bg-color);
   padding: 2.5rem;
@@ -701,9 +703,14 @@ td {
 }
 
 @media (max-width: 968px) {
-  .dashboard-layout { flex-direction: column; }
+  .dashboard-layout { flex-direction: column; overflow-x: hidden; }
   .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border-color); }
-  .main-content { margin-left: 0; padding: 1.5rem; }
+  .main-content { 
+    margin-left: 0; 
+    padding: 1.5rem; 
+    width: 100%;
+    overflow-x: auto; /* Added to allow content like wide tables to scroll on mobile */
+  }
   
   .auth-wrapper {
     flex-direction: column;
