@@ -16,7 +16,7 @@ public class DoctorDAOImpl implements DoctorDAO {
     public List<Appointment> getAppointmentsForDoctor(Long doctorId) {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT a FROM Appointment a WHERE a.doctor.id = :did ORDER BY a.appointmentDate ASC", Appointment.class)
+            return em.createQuery("SELECT a FROM Appointment a WHERE a.doctor.id = :did ORDER BY a.appointmentDate DESC", Appointment.class)
                     .setParameter("did", doctorId)
                     .getResultList();
         } finally {
@@ -29,7 +29,7 @@ public class DoctorDAOImpl implements DoctorDAO {
         EntityManager em = emf.createEntityManager();
         try {
             // Distinct patients who have appointments with this doctor
-            return em.createQuery("SELECT DISTINCT a.patient FROM Appointment a WHERE a.doctor.id = :did", User.class)
+            return em.createQuery("SELECT DISTINCT a.patient FROM Appointment a WHERE a.doctor.id = :did ORDER BY a.patient.createdAt DESC", User.class)
                     .setParameter("did", doctorId)
                     .getResultList();
         } finally {
