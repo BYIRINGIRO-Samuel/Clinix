@@ -30,7 +30,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     public List<Department> getAllDepartments() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT d FROM Department d", Department.class).getResultList();
+            return em.createQuery("SELECT d FROM Department d ORDER BY d.id DESC", Department.class).getResultList();
         } finally {
             em.close();
         }
