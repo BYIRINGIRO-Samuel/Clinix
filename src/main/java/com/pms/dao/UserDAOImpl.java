@@ -56,7 +56,7 @@ public class UserDAOImpl implements UserDAO {
     public List<User> getAllUsers() {
         EntityManager em = emf.createEntityManager();
         try {
-            return em.createQuery("SELECT u FROM User u", User.class).getResultList();
+            return em.createQuery("SELECT u FROM User u ORDER BY u.createdAt DESC", User.class).getResultList();
         } finally {
             em.close();
         }
