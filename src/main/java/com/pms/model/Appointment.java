@@ -18,9 +18,11 @@ public class Appointment {
     @JoinColumn(name = "doctor_id")
     private User doctor;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date appointmentDate;
     private String status; // Pending, Confirmed, Completed, Cancelled
     private String reason;
+    @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date createdAt = new java.util.Date();
 
     public java.util.Date getCreatedAt() { return createdAt; }
