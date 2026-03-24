@@ -19,12 +19,10 @@
             overflow-x: auto;
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin; /* Restore visible but thin scrollbar for clarity */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
-        /* Style scrollbar to look like sidebar */
-        .settings-tabs::-webkit-scrollbar { height: 4px; }
-        .settings-tabs::-webkit-scrollbar-track { background: transparent; }
-        .settings-tabs::-webkit-scrollbar-thumb { background: var(--teal-primary); border-radius: 10px; }
+        .settings-tabs::-webkit-scrollbar { display: none; }
 
         .tab-btn {
             padding: 0.75rem 1.5rem;
