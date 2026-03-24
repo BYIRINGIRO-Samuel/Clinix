@@ -20,6 +20,7 @@ public class Billing {
 
     private double amount;
     private String status; // Pending, Paid, Cancelled
+    @Temporal(TemporalType.TIMESTAMP)
     private Date billingDate;
     private String paymentMethod;
 
