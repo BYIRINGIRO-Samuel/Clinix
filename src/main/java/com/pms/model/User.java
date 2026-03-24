@@ -28,7 +28,10 @@ public class User {
     @JoinColumn(name = "department_id")
     private Department department;
     
+    @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date lastNotifCheck;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date createdAt = new java.util.Date();
 
     public java.util.Date getLastNotifCheck() { return lastNotifCheck; }
