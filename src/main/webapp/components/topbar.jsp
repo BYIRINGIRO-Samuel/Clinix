@@ -4,6 +4,12 @@
 <%@ page import="com.pms.dao.ReceptionistDAO, com.pms.dao.ReceptionistDAOImpl, com.pms.dao.AdminDAO, com.pms.dao.AdminDAOImpl" %>
 <link rel="stylesheet" href="css/toast.css">
 
+<style>
+    /* Hide scrollbars globally as CSS files are currently locked by the server */
+    * { -ms-overflow-style: none; scrollbar-width: none; }
+    *::-webkit-scrollbar { display: none; }
+</style>
+
 <%
     User topbarUser = (User) session.getAttribute("user");
     String tbName = (topbarUser != null) ? topbarUser.getFullName() : "Guest";
@@ -15,22 +21,25 @@
     if (topbarUser != null) {
         java.util.Date lastCheck = topbarUser.getLastNotifCheck();
         if (lastCheck == null) {
-            // If never checked, use a very old date
             lastCheck = new java.util.Date(0); 
         }
+        
+        // Use a small buffer (1 second) to ensure we don't catch notifications created at the exact moment of check
+        long lastCheckTime = lastCheck.getTime() + 1000;
+        java.util.Date adjustedCheck = new java.util.Date(lastCheckTime);
 
         if ("Patient".equals(tbRole)) {
             PatientDAO pDao = new PatientDAOImpl();
             for(Appointment a : pDao.getAppointmentsByPatientId(topbarUser.getId())) {
                 if ("Scheduled".equals(a.getStatus())) {
                     java.util.Date created = a.getCreatedAt();
-                    if (created != null && created.after(lastCheck)) unreadCount++;
+                    if (created != null && created.after(adjustedCheck)) unreadCount++;
                 }
             }
             for(Billing b : pDao.getBillingsByPatientId(topbarUser.getId())) {
                 if ("Pending".equals(b.getStatus())) {
                     java.util.Date bDate = b.getBillingDate();
-                    if (bDate != null && bDate.after(lastCheck)) unreadCount++;
+                    if (bDate != null && bDate.after(adjustedCheck)) unreadCount++;
                 }
             }
         } else if ("Doctor".equals(tbRole)) {
@@ -38,7 +47,7 @@
             for(Appointment a : dDao.getAppointmentsForDoctor(topbarUser.getId())) {
                 if ("Scheduled".equals(a.getStatus())) {
                     java.util.Date created = a.getCreatedAt();
-                    if (created != null && created.after(lastCheck)) unreadCount++;
+                    if (created != null && created.after(adjustedCheck)) unreadCount++;
                 }
             }
         } else if ("Receptionist".equals(tbRole)) {
@@ -46,7 +55,7 @@
             for(Billing b : rDao.getAllBillings()) {
                 if ("Pending".equals(b.getStatus())) {
                     java.util.Date bDate = b.getBillingDate();
-                    if (bDate != null && bDate.after(lastCheck)) unreadCount++;
+                    if (bDate != null && bDate.after(adjustedCheck)) unreadCount++;
                 }
             }
         } else if ("Admin".equals(tbRole)) {
@@ -56,7 +65,7 @@
                 for(Object[] log : acts) {
                     java.util.Date logDate = null;
                     if (log[2] instanceof java.util.Date) logDate = (java.util.Date) log[2];
-                    if (logDate != null && logDate.after(lastCheck)) unreadCount++;
+                    if (logDate != null && logDate.after(adjustedCheck)) unreadCount++;
                 }
             }
         }
