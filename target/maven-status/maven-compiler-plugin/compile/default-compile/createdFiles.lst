@@ -4,6 +4,7 @@ com\pms\controller\ReceptionistServlet.class
 com\pms\dao\UserDAOImpl.class
 com\pms\controller\LogoutServlet.class
 com\pms\dao\DepartmentDAOImpl.class
+com\pms\controller\NotificationActionServlet.class
 com\pms\dao\AdminDAOImpl.class
 com\pms\controller\LoginServlet.class
 com\pms\dao\UserDAO.class
