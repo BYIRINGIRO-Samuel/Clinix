@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/folder-cards.css">
     <link rel="stylesheet" href="css/topbar.css">
+    <style>
+        .role-badge { white-space: nowrap !important; display: inline-block !important; }
+        .btn-primary { white-space: nowrap !important; display: inline-block !important; }
+        th, td { white-space: nowrap; padding: 1.25rem 1.5rem !important; }
+        .reason-col { white-space: normal !important; min-width: 200px; }
+    </style>
 </head>
 <body>
     <%
@@ -61,24 +67,34 @@
                         <thead>
                             <tr>
                                 <th>Time</th>
-                                <th>Patient Name</th>
-                                <th>Reason</th>
+                                <th style="width: 250px;">Patient Name</th>
+                                <th class="reason-col">Reason</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th style="text-align: right;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% if (appointments.isEmpty()) { %>
                                 <tr><td colspan="5" style="text-align: center; padding: 3rem;">No appointments scheduled today.</td></tr>
                             <% } else { %>
-                                <% for (Appointment a : appointments) { %>
+                                <% 
+                                    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MMM dd, hh:mm a");
+                                    for (Appointment a : appointments) { 
+                                %>
                                     <tr>
-                                        <td><%= a.getAppointmentDate() %></td>
+                                        <td><strong><%= (a.getAppointmentDate() != null) ? sdf.format(a.getAppointmentDate()) : "N/A" %></strong></td>
                                         <td style="font-weight: 600;"><%= a.getPatient().getFullName() %></td>
-                                        <td><%= a.getReason() %></td>
-                                        <td><span class="role-badge badge-Patient"><%= a.getStatus() %></span></td>
+                                        <td class="reason-col"><%= a.getReason() %></td>
                                         <td>
-                                            <a href="DoctorServlet?action=viewHistory&patientId=<%= a.getPatient().getId() %>" class="btn-primary" style="padding: 0.3rem 0.6rem; font-size: 0.8rem; text-decoration: none;">View Profile</a>
+                                            <% 
+                                                String bClass = "badge-Patient"; 
+                                                if("Scheduled".equals(a.getStatus())) bClass = "badge-Doctor";
+                                                else if("Completed".equals(a.getStatus())) bClass = "badge-Admin";
+                                            %>
+                                            <span class="role-badge <%= bClass %>"><%= a.getStatus() %></span>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <a href="DoctorServlet?action=viewHistory&patientId=<%= a.getPatient().getId() %>" class="btn-primary" style="text-decoration: none;">View Profile</a>
                                         </td>
                                     </tr>
                                 <% } %>
