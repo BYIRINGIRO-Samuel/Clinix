@@ -3,7 +3,6 @@
 <%@ page import="com.pms.dao.PatientDAO, com.pms.dao.PatientDAOImpl, com.pms.dao.DoctorDAO, com.pms.dao.DoctorDAOImpl" %>
 <%@ page import="com.pms.dao.ReceptionistDAO, com.pms.dao.ReceptionistDAOImpl, com.pms.dao.AdminDAO, com.pms.dao.AdminDAOImpl" %>
 <link rel="stylesheet" href="css/toast.css">
-<link rel="stylesheet" href="css/modern-ui.css">
 
 <style>
     /* Hide scrollbars globally as CSS files are currently locked by the server */
