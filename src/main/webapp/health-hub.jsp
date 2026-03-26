@@ -12,53 +12,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Hub | Digital Twin | PMS Health</title>
+    <title>Health Hub | PMS Health</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/topbar.css">
+    <style>
+        .hub-hero { position: relative; border-radius: 20px; padding: 3rem; color: white; margin-bottom: 2rem; overflow: hidden; background: #0f172a; }
+        .hero-img { position: absolute; top: 0; right: 0; height: 100%; opacity: 0.5; }
+        .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .metric-card { background: white; border-radius: 16px; padding: 1.5rem; border: 1px solid var(--border-color); }
+        .live-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(34, 197, 94, 0.1); color: #22c55e; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; font-weight: 700; margin-bottom: 1rem; }
+        .pulse-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; }
+    </style>
 </head>
-<body class="premium-font">
+<body>
     <div class="dashboard-layout">
         <jsp:include page="components/sidebar.jsp" />
         <main class="main-content">
             <jsp:include page="components/topbar.jsp" />
             <div class="main-inner-content">
                 
-                <div class="hero-glass" style="margin-bottom: 2.5rem; background: linear-gradient(135deg, rgba(13, 148, 136, 0.9), rgba(99, 102, 241, 0.7));">
-                    <div style="max-width: 600px;">
-                        <div class="status-indicator" style="margin-bottom: 1rem; color: #ffffff;">
-                            <span class="pulse-dot" style="background: white; box-shadow: 0 0 10px white;"></span>
-                            IoT Wearable Sync: ACTIVE
-                        </div>
-                        <h1 style="font-size: 3.5rem; line-height: 1; margin-bottom: 1rem;">Health Twin 2.0</h1>
-                        <p style="font-size: 1.1rem; opacity: 0.9;">Real-time biological telemetry and AI-driven risk forecasting based on your active health profile.</p>
-                        <div style="margin-top: 2rem; display: flex; gap: 1rem;">
-                            <button class="premium-btn" style="background: white; color: var(--premium-accent);">Connect Device</button>
+                <div class="hub-hero">
+                    <img src="health_digital_twin_hero_1774448364126.png" alt="Digital Twin" class="hero-img">
+                    <div style="position: relative; z-index: 2;">
+                        <div class="live-tag"><span class="pulse-dot"></span> REAL-TIME SYNC</div>
+                        <h1 style="font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem;">Digital Twin 2.0</h1>
+                        <p style="font-size: 1rem; opacity: 0.8; max-width: 500px;">A high-fidelity biological model of your health, updated per second via your connected IoT devices.</p>
+                        <div style="margin-top: 1.5rem;">
+                            <button class="btn-primary" style="padding: 0.75rem 1.5rem; border-radius: 10px;">Connect Wearable</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="premium-stat-grid" style="margin-bottom: 2.5rem;">
-                    <div class="glass-container">
-                        <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 800; text-transform: uppercase;">Heart Rate</div>
-                        <div style="font-size: 2.5rem; font-weight: 900; margin: 0.5rem 0;">72 <small style="font-size: 1rem; font-weight: 600;">BPM</small></div>
-                        <div style="height: 4px; background: #f1f5f9; border-radius: 2px;"><div style="width: 70%; height: 100%; background: #ef4444; border-radius: 2px;"></div></div>
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Heart Rate</p>
+                        <div style="font-size: 2rem; font-weight: 800;">72 <small style="font-size: 1rem;">BPM</small></div>
                     </div>
-                    <div class="glass-container">
-                        <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 800; text-transform: uppercase;">Sleep Quality</div>
-                        <div style="font-size: 2.5rem; font-weight: 900; margin: 0.5rem 0;">8.2 <small style="font-size: 1rem; font-weight: 600;">HRS</small></div>
-                        <div style="height: 4px; background: #f1f5f9; border-radius: 2px;"><div style="width: 85%; height: 100%; background: #3b82f6; border-radius: 2px;"></div></div>
+                    <div class="metric-card">
+                        <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">SpO2 Levels</p>
+                        <div style="font-size: 2rem; font-weight: 800;">98 <small style="font-size: 1rem;">%</small></div>
                     </div>
-                    <div class="glass-container">
-                        <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 800; text-transform: uppercase;">Blood Oxygen</div>
-                        <div style="font-size: 2.5rem; font-weight: 900; margin: 0.5rem 0;">98 <small style="font-size: 1rem; font-weight: 600;">%</small></div>
-                        <div style="height: 4px; background: #f1f5f9; border-radius: 2px;"><div style="width: 98%; height: 100%; background: #06b6d4; border-radius: 2px;"></div></div>
-                    </div>
-                </div>
-
-                <div class="glass-container">
-                    <h3 style="font-weight: 800; margin-bottom: 1.5rem;">Longitudinal Health Forecast</h3>
-                    <div style="background: rgba(0,0,0,0.02); height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px dashed rgba(0,0,0,0.1);">
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">[Data Visualization Engine Initializing...]</p>
+                    <div class="metric-card">
+                        <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Active Steps</p>
+                        <div style="font-size: 2rem; font-weight: 800;">8,432</div>
                     </div>
                 </div>
             </div>
