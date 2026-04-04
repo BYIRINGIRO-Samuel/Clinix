@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="css/toast.css">
 
 <style>
-    /* Hide scrollbars globally as CSS files are currently locked by the server */
     * { -ms-overflow-style: none; scrollbar-width: none; }
     *::-webkit-scrollbar { display: none; }
 </style>
