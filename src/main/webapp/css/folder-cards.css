@@ -28,7 +28,7 @@
   width: 90px;
   height: var(--folder-tab-height);
   background: var(--folder-green);
-  border-radius: 4px 4px 0 0; /* Reduced from 8px */
+  border-radius: 4px 4px 0 0; 
 }
 
 .stat-card:hover {
