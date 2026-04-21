@@ -33,6 +33,13 @@
             background-size: 60px 105px;
             background-position: 0 0, 0 0, 30px 52.5px, 30px 52.5px, 0 0, 30px 52.5px;
         }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-anim { animation: floating 5s ease-in-out infinite; }
     </style>
 </head>
 
@@ -65,28 +72,68 @@
         </div>
     </div>
 
-    <!-- Hero Section (FULL TEXTURE BACKGROUND) -->
-    <section id="hero" class="relative min-h-[80vh] flex items-center diamond-mesh-full overflow-hidden">
-        <div class="absolute inset-0 bg-white/90 pointer-events-none"></div> <!-- Softening the texture for readability -->
+    <!-- Hero Section (CIRCULAR IMAGE + SIMPLE UI) -->
+    <section id="hero" class="relative min-h-[85vh] flex items-center diamond-mesh-full overflow-hidden">
+        <div class="absolute inset-0 bg-white/90 pointer-events-none"></div>
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald/5 rounded-full blur-[120px] -z-0"></div>
 
         <div class="max-w-7xl mx-auto px-4 w-full z-10 pt-32 pb-10">
-            <div class="max-w-2xl space-y-8 animate-in fade-in slide-in-from-left duration-1000">
-                <div class="space-y-4">
-                    <span class="inline-block text-emerald font-black text-[10px] tracking-[0.4em] uppercase px-4 py-1.5 bg-emerald-50 rounded-lg border border-emerald-100 shadow-sm italic">Precision Care Portfolio</span>
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] tracking-tighter">
-                        Integrated Care. <br /> 
-                        <span class="text-emerald italic underline decoration-4 decoration-emerald-100 underline-offset-8">Precision</span> Logic.
-                    </h1>
-                    <p class="text-base md:text-lg text-slate-500 font-medium leading-relaxed max-w-lg opacity-80">
-                        Efficient handling of patient records, departmental coordination, and automated billing workflows with data integrity.
-                    </p>
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                
+                <!-- Left Side Content -->
+                <div class="max-w-xl space-y-8 animate-in fade-in slide-in-from-left duration-1000">
+                    <div class="space-y-4">
+                        <span class="inline-block text-emerald font-black text-[10px] tracking-[0.4em] uppercase px-4 py-1.5 bg-emerald-50 rounded-lg border border-emerald-100 shadow-sm italic">Precision Care Portfolio</span>
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] tracking-tighter">
+                            Integrated Care. <br /> 
+                            <span class="text-emerald italic underline decoration-4 decoration-emerald-100 underline-offset-8">Precision</span> Logic.
+                        </h1>
+                        <p class="text-base md:text-lg text-slate-500 font-medium leading-relaxed max-w-lg opacity-80">
+                            Efficient handling of patient records, departmental coordination, and automated billing workflows with data integrity.
+                        </p>
+                    </div>
+                    <div class="flex items-center pt-4">
+                        <a href="signup.jsp" class="px-12 py-5 bg-emerald text-white rounded-2xl font-black text-lg hover:bg-[#0b5948] transition-all hover:translate-y-[-4px] shadow-2xl shadow-emerald/20">
+                            Register Facility
+                        </a>
+                    </div>
                 </div>
-                <div class="flex items-center pt-4">
-                    <a href="signup.jsp" class="px-12 py-5 bg-emerald text-white rounded-2xl font-black text-lg hover:bg-[#0b5948] transition-all hover:translate-y-[-4px] shadow-2xl shadow-emerald/20">
-                        Register Facility
-                    </a>
+
+                <!-- Right Side Circular Image and Simple UI -->
+                <div class="flex-1 relative flex justify-center lg:justify-end animate-in fade-in zoom-in duration-1000">
+                   <div class="relative float-anim">
+                      <!-- Circular Professional Image -->
+                      <div class="w-72 h-72 md:w-96 md:h-96 rounded-full border-8 border-white shadow-2xl overflow-hidden shadow-emerald/10 relative z-10">
+                         <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500" alt="Clinix Professional">
+                      </div>
+                      
+                      <!-- Decorative Circle Background -->
+                      <div class="absolute -top-6 -right-6 w-32 h-32 bg-emerald/10 rounded-full blur-xl"></div>
+                      
+                      <!-- Floating "Simple UI" Pill 1 -->
+                      <div class="absolute -top-4 -left-12 bg-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-50 z-20 hover:scale-105 transition-transform">
+                         <div class="w-8 h-8 rounded-full bg-emerald/10 flex items-center justify-center">
+                            <i data-lucide="eye" class="w-4 h-4 text-emerald"></i>
+                         </div>
+                         <div class="flex flex-col">
+                            <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Live Access</span>
+                            <span class="text-xs font-bold text-slate-700">24/7 Monitoring</span>
+                         </div>
+                      </div>
+
+                      <!-- Floating "Simple UI" Pill 2 -->
+                      <div class="absolute -bottom-4 -right-8 bg-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-50 z-20 hover:scale-105 transition-transform">
+                         <div class="w-8 h-8 rounded-full bg-emerald/10 flex items-center justify-center">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-emerald"></i>
+                         </div>
+                         <div class="flex flex-col">
+                            <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Status</span>
+                            <span class="text-xs font-bold text-slate-700">EMR Verified</span>
+                         </div>
+                      </div>
+                   </div>
                 </div>
+
             </div>
         </div>
     </section>
