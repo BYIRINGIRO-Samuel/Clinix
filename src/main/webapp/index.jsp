@@ -47,7 +47,7 @@
 
     <!-- Navbar -->
     <div class="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-8">
-        <div class="max-w-7xl w-full flex items-center justify-between pointer-events-none gap-6">
+        <div class="max-w-[1440px] w-full flex items-center justify-between pointer-events-none gap-6 px-10">
             <div class="glass-pill px-5 py-2 rounded-full pointer-events-auto shadow-lg flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
                 <span class="text-[8px] font-black text-slate-500 uppercase tracking-widest leading-none">Security Active</span>
@@ -72,15 +72,15 @@
         </div>
     </div>
 
-    <!-- Hero Section (CIRCULAR IMAGE + SIMPLE UI) -->
+    <!-- Hero Section (PUSHED TO THE LEFT) -->
     <section id="hero" class="relative min-h-[85vh] flex items-center diamond-mesh-full overflow-hidden">
         <div class="absolute inset-0 bg-white/90 pointer-events-none"></div>
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald/5 rounded-full blur-[120px] -z-0"></div>
 
-        <div class="max-w-7xl mx-auto px-4 w-full z-10 pt-32 pb-10">
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+        <div class="max-w-[1440px] w-full z-10 pt-32 pb-10 px-8 md:px-20 lg:ml-0"> <!-- Reduced left margin and improved container alignment -->
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:justify-start lg:gap-32">
                 
-                <!-- Left Side Content -->
+                <!-- Left Side Content (Pushed Left) -->
                 <div class="max-w-xl space-y-8 animate-in fade-in slide-in-from-left duration-1000">
                     <div class="space-y-4">
                         <span class="inline-block text-emerald font-black text-[10px] tracking-[0.4em] uppercase px-4 py-1.5 bg-emerald-50 rounded-lg border border-emerald-100 shadow-sm italic">Precision Care Portfolio</span>
@@ -100,17 +100,12 @@
                 </div>
 
                 <!-- Right Side Circular Image and Simple UI -->
-                <div class="flex-1 relative flex justify-center lg:justify-end animate-in fade-in zoom-in duration-1000">
+                <div class="relative flex justify-center lg:justify-end animate-in fade-in zoom-in duration-1000">
                    <div class="relative float-anim">
-                      <!-- Circular Professional Image -->
-                      <div class="w-72 h-72 md:w-96 md:h-96 rounded-full border-8 border-white shadow-2xl overflow-hidden shadow-emerald/10 relative z-10">
+                      <div class="w-72 h-72 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] rounded-full border-8 border-white shadow-2xl overflow-hidden shadow-emerald/10 relative z-10">
                          <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500" alt="Clinix Professional">
                       </div>
-                      
-                      <!-- Decorative Circle Background -->
                       <div class="absolute -top-6 -right-6 w-32 h-32 bg-emerald/10 rounded-full blur-xl"></div>
-                      
-                      <!-- Floating "Simple UI" Pill 1 -->
                       <div class="absolute -top-4 -left-12 bg-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-50 z-20 hover:scale-105 transition-transform">
                          <div class="w-8 h-8 rounded-full bg-emerald/10 flex items-center justify-center">
                             <i data-lucide="eye" class="w-4 h-4 text-emerald"></i>
@@ -120,8 +115,6 @@
                             <span class="text-xs font-bold text-slate-700">24/7 Monitoring</span>
                          </div>
                       </div>
-
-                      <!-- Floating "Simple UI" Pill 2 -->
                       <div class="absolute -bottom-4 -right-8 bg-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-50 z-20 hover:scale-105 transition-transform">
                          <div class="w-8 h-8 rounded-full bg-emerald/10 flex items-center justify-center">
                             <i data-lucide="check-circle" class="w-4 h-4 text-emerald"></i>
@@ -171,28 +164,28 @@
 
     <!-- Our Main Services -->
     <section id="features" class="py-32 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-24">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="mb-24">
                 <span class="text-emerald font-black text-[10px] tracking-widest uppercase">System Categories</span>
-                <h2 class="text-3xl md:text-5xl font-black mt-4 tracking-tighter">Core Solutions.</h2>
+                <h2 class="text-3xl md:text-5xl font-black mt-4 tracking-tighter text-slate-900">Core Solutions.</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="group p-10 bg-white rounded-[3rem] border border-slate-100 hover:border-emerald/20 transition-all hover:-translate-y-3 shadow-sm">
+                <div class="group p-10 bg-white rounded-[3rem] border border-slate-100 hover:border-emerald/20 transition-all hover:-translate-y-3 shadow-sm text-left">
                     <div class="w-16 h-16 bg-emerald rounded-2xl flex items-center justify-center mb-8 shadow-xl shadow-emerald/20 group-hover:rotate-12 transition-transform">
                         <i data-lucide="folder-check" class="w-8 h-8 text-white"></i>
                     </div>
                     <h3 class="text-2xl font-black mb-4">Records Hub</h3>
                     <p class="text-slate-500 font-semibold text-sm leading-relaxed">Handling lifecycles with medical data integrity refocus.</p>
                 </div>
-                <div class="group p-10 bg-white rounded-[3rem] border border-slate-100 hover:border-emerald/20 transition-all hover:-translate-y-3 shadow-sm">
+                <div class="group p-10 bg-white rounded-[3rem] border border-slate-100 hover:border-emerald/20 transition-all hover:-translate-y-3 shadow-sm text-left">
                     <div class="w-16 h-16 bg-emerald rounded-2xl flex items-center justify-center mb-8 shadow-xl shadow-emerald/20 group-hover:rotate-12 transition-transform">
                         <i data-lucide="calendar-plus" class="w-8 h-8 text-white"></i>
                     </div>
                     <h3 class="text-2xl font-black mb-4">Booking Logic</h3>
                     <p class="text-slate-500 font-semibold text-sm leading-relaxed">Streamlined departmental sync scheduling protocols.</p>
                 </div>
-                <div class="group p-10 bg-white rounded-[3rem] border border-slate-100 hover:border-emerald/20 transition-all hover:-translate-y-3 shadow-sm">
+                <div class="group p-10 bg-white rounded-[3rem] border border-slate-100 hover:border-emerald/20 transition-all hover:-translate-y-3 shadow-sm text-left">
                     <div class="w-16 h-16 bg-emerald rounded-2xl flex items-center justify-center mb-8 shadow-xl shadow-emerald/20 group-hover:rotate-12 transition-transform">
                         <i data-lucide="banknote" class="w-8 h-8 text-white"></i>
                     </div>
@@ -241,7 +234,7 @@
 
     <!-- Footer -->
     <footer class="bg-slate-900 pb-16 text-white pt-10">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-white/5 pt-12">
+        <div class="max-w-[1440px] mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-white/5 pt-12">
             <div class="flex items-center gap-3">
                 <i data-lucide="heart" class="w-7 h-7 text-emerald fill-emerald"></i>
                 <span class="text-3xl font-black tracking-tighter uppercase italic text-emerald">Clinix.</span>
