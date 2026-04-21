@@ -20,6 +20,7 @@
         .faq-item.active .minus-icon { display: block; }
         .minus-icon { display: none; }
         
+        /* 3D Geometric Diamond Texture (Full Width Hero) */
         .diamond-mesh-full {
             background-color: #ffffff;
             background-image: 
@@ -66,20 +67,21 @@
             </div>
 
             <!-- Signup Pill (REMOVED BORDER RADIUS) -->
-            <div class="bg-emerald px-10 py-3 rounded-none pointer-events-auto shadow-xl shadow-emerald-500/30 flex items-center justify-center hover:scale-105 transition-all">
+            <div class="bg-emerald px-10 py-3 rounded-[4px] pointer-events-auto shadow-xl shadow-emerald-500/30 flex items-center justify-center hover:scale-105 transition-all">
                 <a href="signup.jsp" class="text-white text-[11px] font-black uppercase tracking-widest">Signup Free</a>
             </div>
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <section id="hero" class="relative min-h-[75vh] flex items-center diamond-mesh-full overflow-hidden">
+    <!-- Hero Section (Height INCREASED to 90vh) -->
+    <section id="hero" class="relative min-h-[90vh] flex items-center diamond-mesh-full overflow-hidden">
         <div class="absolute inset-0 bg-white/90 pointer-events-none"></div>
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald/5 rounded-full blur-[120px] -z-0"></div>
 
-        <div class="max-w-[1440px] w-full z-10 pt-32 pb-4 px-8 md:px-20 lg:ml-0"> <!-- Reduced pb-4 to fix gap -->
+        <div class="max-w-[1440px] w-full z-10 pt-32 pb-4 px-8 md:px-20 lg:ml-0">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:justify-start lg:gap-32">
                 
+                <!-- Left Content -->
                 <div class="max-w-xl space-y-8 animate-in fade-in slide-in-from-left duration-1000">
                     <div class="space-y-4">
                         <span class="inline-block text-emerald font-black text-[10px] tracking-[0.4em] uppercase px-4 py-1.5 bg-emerald-50 rounded-lg border border-emerald-100 shadow-sm italic">Precision Care Portfolio</span>
@@ -92,15 +94,16 @@
                         </p>
                     </div>
                     <div class="flex items-center pt-4">
-                        <a href="signup.jsp" class="px-12 py-5 bg-emerald text-white rounded-none font-black text-lg hover:bg-[#0b5948] transition-all hover:translate-y-[-4px] shadow-2xl shadow-emerald/20">
+                        <a href="signup.jsp" class="px-12 py-5 bg-emerald text-white rounded-[4px] font-black text-lg hover:bg-[#0b5948] transition-all hover:translate-y-[-4px] shadow-2xl shadow-emerald/20">
                             Register Facility
                         </a>
                     </div>
                 </div>
 
+                <!-- Right Side Circular Figure -->
                 <div class="relative flex justify-center lg:justify-end animate-in fade-in zoom-in duration-1000">
                    <div class="relative float-anim">
-                      <div class="w-72 h-72 md:w-80 md:h-80 lg:w-[380px] lg:h-[380px] rounded-full border-8 border-white shadow-2xl overflow-hidden shadow-emerald/10 relative z-10">
+                      <div class="w-72 h-72 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px] rounded-full border-8 border-white shadow-2xl overflow-hidden shadow-emerald/10 relative z-10">
                          <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500" alt="Clinix Professional">
                       </div>
                       <div class="absolute -top-6 -right-6 w-32 h-32 bg-emerald/10 rounded-full blur-xl"></div>
@@ -129,8 +132,8 @@
         </div>
     </section>
 
-    <!-- How it works (REDUCED TOP SPACING) -->
-    <section id="about" class="py-20 bg-white"> <!-- Reduced py-32 to py-20 -->
+    <!-- Lifecycle Section -->
+    <section id="about" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex flex-col lg:flex-row items-center gap-20">
                 <div class="flex-1 space-y-8">
@@ -160,14 +163,13 @@
         </div>
     </section>
 
-    <!-- Our Main Services -->
+    <!-- Services -->
     <section id="features" class="py-32 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <div class="mb-24">
                 <span class="text-emerald font-black text-[10px] tracking-widest uppercase">System Categories</span>
                 <h2 class="text-3xl md:text-5xl font-black mt-4 tracking-tighter text-slate-900">Core Solutions.</h2>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="group p-10 bg-white rounded-[3rem] border border-slate-100 hover:border-emerald/20 transition-all hover:-translate-y-3 shadow-sm text-left">
                     <div class="w-16 h-16 bg-emerald rounded-2xl flex items-center justify-center mb-8 shadow-xl shadow-emerald/20 group-hover:rotate-12 transition-transform">
@@ -194,15 +196,13 @@
         </div>
     </section>
 
-    <!-- FAQ Accordion (PROFESSIONAL QUESTIONS) -->
+    <!-- FAQ -->
     <section id="faq" class="py-32 bg-slate-900 text-white rounded-t-[5rem]">
        <div class="max-w-4xl mx-auto px-4">
           <div class="text-center mb-24">
              <h2 class="text-3xl md:text-4xl font-black tracking-tight italic">Support Desk.</h2>
           </div>
-
           <div class="space-y-6">
-             <!-- Q1: Compliance -->
              <div class="faq-item border border-white/10 rounded-[2.5rem] p-8 hover:bg-white/5 transition-all cursor-pointer group" onclick="this.classList.toggle('active')">
                 <div class="flex items-center justify-between gap-6">
                    <h4 class="text-xl font-bold group-hover:text-emerald transition-colors">How does Clinix ensure HIPAA and data security compliance?</h4>
@@ -212,46 +212,19 @@
                    </div>
                 </div>
                 <div class="faq-answer">
-                   <p class="text-slate-400 text-lg font-medium leading-relaxed pt-8">We utilize AES-256 bite encryption and strictly follow HIPAA/GDPR guidelines to maintain absolute integrity for all patient medical records and access logs.</p>
+                   <p class="text-slate-400 text-lg font-medium leading-relaxed pt-8">We utilize AES-256 encryption and follow HIPAA/GDPR guidelines for absolute data integrity.</p>
                 </div>
              </div>
-             <!-- Q2: Integration -->
              <div class="faq-item border border-white/10 rounded-[2.5rem] p-8 hover:bg-white/5 transition-all cursor-pointer group" onclick="this.classList.toggle('active')">
                 <div class="flex items-center justify-between gap-6">
-                   <h4 class="text-xl font-bold group-hover:text-emerald transition-colors">Can Clinix integrate with existing laboratory or pharmacy systems?</h4>
+                   <h4 class="text-xl font-bold group-hover:text-emerald transition-colors">Can Clinix integrate with clinical third-party systems?</h4>
                    <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-emerald/10 transition-colors">
                       <i data-lucide="plus" class="w-5 h-5 text-emerald plus-icon"></i>
                       <i data-lucide="minus" class="w-5 h-5 text-emerald minus-icon"></i>
                    </div>
                 </div>
                 <div class="faq-answer">
-                   <p class="text-slate-400 text-lg font-medium leading-relaxed pt-8">Yes, our HL7-compliant API bridge enables seamless coordination across various medical departments and external vendor systems instantly.</p>
-                </div>
-             </div>
-             <!-- Q3: Billing -->
-             <div class="faq-item border border-white/10 rounded-[2.5rem] p-8 hover:bg-white/5 transition-all cursor-pointer group" onclick="this.classList.toggle('active')">
-                <div class="flex items-center justify-between gap-6">
-                   <h4 class="text-xl font-bold group-hover:text-emerald transition-colors">Does the platform support automated insurance claim verification?</h4>
-                   <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-emerald/10 transition-colors">
-                      <i data-lucide="plus" class="w-5 h-5 text-emerald plus-icon"></i>
-                      <i data-lucide="minus" class="w-5 h-5 text-emerald minus-icon"></i>
-                   </div>
-                </div>
-                <div class="faq-answer">
-                   <p class="text-slate-400 text-lg font-medium leading-relaxed pt-8">Absolutely. Our billing module includes integrated workflows for real-time insurance verification and automated invoice generation to improve facility efficiency.</p>
-                </div>
-             </div>
-             <!-- Q4: Support -->
-             <div class="faq-item border border-white/10 rounded-[2.5rem] p-8 hover:bg-white/5 transition-all cursor-pointer group" onclick="this.classList.toggle('active')">
-                <div class="flex items-center justify-between gap-6">
-                   <h4 class="text-xl font-bold group-hover:text-emerald transition-colors">What level of technical support is available for medical staff?</h4>
-                   <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-emerald/10 transition-colors">
-                      <i data-lucide="plus" class="w-5 h-5 text-emerald plus-icon"></i>
-                      <i data-lucide="minus" class="w-5 h-5 text-emerald minus-icon"></i>
-                   </div>
-                </div>
-                <div class="faq-answer">
-                   <p class="text-slate-400 text-lg font-medium leading-relaxed pt-8">We provide 24/7 priority support and comprehensive 1-on-1 team training sessions to ensure your staff can handle life cycle records with confidence.</p>
+                   <p class="text-slate-400 text-lg font-medium leading-relaxed pt-8">Our HL7-compliant API bridge enables seamless coordination across medical departments and vendors.</p>
                 </div>
              </div>
           </div>
