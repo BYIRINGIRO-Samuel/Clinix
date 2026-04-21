@@ -8,7 +8,7 @@
     <title>Clinix | Professional Patient Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script defer src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body { font-family: 'Poppins', sans-serif; }
         .glass-pill { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(18, 135, 109, 0.1); }
@@ -226,7 +226,9 @@
     </footer>
 
     <script>
-        lucide.createIcons();
+        window.onload = function() {
+            lucide.createIcons();
+        };
     </script>
 </body>
 </html>
