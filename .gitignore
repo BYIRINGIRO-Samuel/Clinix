@@ -4,8 +4,3 @@ target/
 .project
 *.mv.db
 *.lock.db
-.mvn/
-mvnw
-mvnw.cmd
-mvnwDebug
-mvnwDebug.cmd
