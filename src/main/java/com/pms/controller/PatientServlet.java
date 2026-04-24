@@ -186,7 +186,7 @@ public class PatientServlet extends HttpServlet {
 
         // In a real application, you would hash the new password before setting it.
         patient.setPassword(newPassword);
-        userDAO.updateUser(patient); // Assuming userDAO has an updateUser method that handles password updates
+        userDAO.updateUser(patient); 
         response.sendRedirect("settings.jsp?status=success&message=Password+updated+successfully");
     }
 
